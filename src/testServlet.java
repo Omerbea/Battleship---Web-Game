@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.*;
 
 @WebServlet (name = "testServlet" , urlPatterns = {"/test"})
-
 public class testServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
