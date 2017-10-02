@@ -33,7 +33,7 @@ public class loadGameServlet extends HttpServlet {
 
         }
         catch (Exception e){
-            
+
         }
         /*Part filePart = req.getPart("gameFile");
         InputStream fileContent = filePart.getInputStream();
