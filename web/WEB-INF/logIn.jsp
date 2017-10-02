@@ -10,7 +10,6 @@
         <input  name="userName" type=text />
         <label> password: </label>
         <input  name="password" type=password />
-        <p>Message: ${message}</p>
         <input type="submit" />
         </form>
     </body>
