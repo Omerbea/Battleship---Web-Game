@@ -11,10 +11,11 @@ import java.io.IOException;
 public class lobbyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Object obj = getServletContext().getAttribute("key");
+
+        Object obj = getServletContext().getAttribute("lobbyManager");
         if (obj == null){
-            GameManager gameManager = new GameManager();
-            getServletContext().setAttribute("key",gameManager);
+            LobbyManager lobbyManager = new LobbyManager();
+            getServletContext().setAttribute("lobbyManager",lobbyManager);
         }
         req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
     }
