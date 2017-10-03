@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Lobby</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/lobby/css/lobbyStyle.css"/>
 </head>
 <body>
 <h1> Lobby </h1>
