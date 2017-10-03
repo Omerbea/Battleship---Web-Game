@@ -546,6 +546,7 @@ public class GameManager {
             this.players = factory.createPlayers();
             this.validator = factory.getGameDataValidator();
             this.userInterface.setBoardSize(factory.GameData.getBoardSize());
+            factory.getga
             this.isGameLoaded = true;
             return true;
         }
