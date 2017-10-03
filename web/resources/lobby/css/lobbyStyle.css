@@ -1,0 +1,48 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(12 , 1fr);
+    grid-auto-rows: minmax(150px , auto);
+    max-width: 80%;
+    grid-gap: 10px;
+    margin: 0 auto;
+}
+.container > * {
+    background: rgba(149, 189, 163, 0.53);
+    padding: 30px;
+}
+
+.head {
+    grid-column: span 12;
+    text-align: center;
+}
+
+.gamesList {
+    grid-column: span 8 ;
+}
+
+.uploadFile {
+    grid-column: 9 / span 4 ;
+}
+
+.activePlayers {
+    grid-column: 9 / span 4 ;
+    grid-row: span 2 ;
+}
+
+table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100% ;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+td{
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

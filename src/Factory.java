@@ -279,4 +279,8 @@ public class Factory {
     public LinkedList<Position> getMineList(GameTool[][] board) {
         return getGameDataValidator().getListOfBadCorrdinatesForMine(board);
     }
+
+    public String getGameType() {
+        return GameData.getGameType();
+    }
 }

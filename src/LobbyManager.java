@@ -29,7 +29,7 @@ public class LobbyManager {
 
     private GameLobbyDetailes createGameDetailes ( GameManager gameManager, String gameName, String playerName){
         int boardSize = gameManager.getBoardSize();
-        String typeGame = gameManager.getTypeGame;
+        String typeGame = gameManager.getGameType();
         GameLobbyDetailes gameDetailes = new GameLobbyDetailes(gameName, playerName, boardSize, typeGame, gameManager);
         return  gameDetailes;
     }

@@ -45,6 +45,7 @@ public class GameManager {
     private long startTime =0;
     private  ArrayList <Replay> replayTurns  = new ArrayList<>();
     private int replayIndex = 0;
+    private String gameType ;
     public SimpleStringProperty propWhoPlayProperty() {
         return propWhoPlay;
     }
@@ -79,6 +80,10 @@ public class GameManager {
 
     public  int getNumOfMinesCurrentPlayer (){
         return this.players[whoPlay].getNumOfMines();
+    }
+
+    public String getGameType (){
+        return  this.gameType;
     }
 
     public boolean getIsGameLoaded (){
@@ -546,8 +551,8 @@ public class GameManager {
             this.players = factory.createPlayers();
             this.validator = factory.getGameDataValidator();
             this.userInterface.setBoardSize(factory.GameData.getBoardSize());
-            factory.getga
             this.isGameLoaded = true;
+            this.gameType = factory.getGameType();
             return true;
         }
         catch (Exception e){
