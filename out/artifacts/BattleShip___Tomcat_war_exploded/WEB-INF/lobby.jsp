@@ -1,16 +1,21 @@
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Lobby</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/lobby/css/lobbyStyle.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="container">
             <header class="head">
+                <button onclick="logout()">logout</button>
                 <h1> Lobby </h1>
             </header>
             <div class="gamesList">
                 <table>
+                    <tbody>
                     <tr>
                         <th>Game Name</th>
                         <th>Created By</th>
@@ -18,19 +23,13 @@
                         <th>Game Type</th>
                         <th>Active</th>
                     </tr>
-                    <tr>
-                        <td>game1</td>
-                        <td>omer</td>
-                        <td>15</td>
-                        <td>Advanced</td>
-                        <td>active</td>
-                    </tr>
+                    </tbody>
                 </table>
             </div>
             <div class="activePlayers">
                 <table>
                     <tr>
-                        <th>Player Name</th>
+                        <th>Active Players</th>
                     </tr>
                 </table>
             </div>
@@ -43,4 +42,28 @@
             </div>
         </div>
     </body>
+    <script type="text/javascript">
+        function logout() {
+            $.ajax({
+                type: "GET",
+                url: "/logout",
+                success: function () {
+                    console.log("user logged out");
+                }
+            });
+        }
+        $.ajax({
+            type: "GET" ,
+            url : "/lobbyData" ,
+            success : function(result) {
+                $.each(result,function(index , element) {
+                    $('.gamesList tbody').append("<tr><td>"+element.name+"</td>" +
+                    "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
+                    "<td>"+element.boardSize+"</td>" +
+                    "<td>"+element.typeGame+"</td>" +
+                    "<td>"+element.isHaveRegisterPlayer+"</td>");
+                });
+            }
+        });
+    </script>
 </html>
