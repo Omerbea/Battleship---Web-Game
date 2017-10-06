@@ -12,11 +12,16 @@ public class lobbyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Object obj = getServletContext().getAttribute("lobbyManager");
-        if (obj == null){
-            LobbyManager lobbyManager = new LobbyManager();
+        LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
+        if (lobbyManager == null){
+             lobbyManager = new LobbyManager();
             getServletContext().setAttribute("lobbyManager",lobbyManager);
         }
+        /* ---- dummy content for debbugging -----
+         */
+        lobbyManager.getGames().put("game  test",  new GameLobbyDetailes("omer" , "omer the king" , 5 , "advanced" , null));
+        lobbyManager.getGames().put("game  test1",  new GameLobbyDetailes("omer1" , "omer the king1" , 20 , "advanced1" , null));
+
         req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
     }
 
