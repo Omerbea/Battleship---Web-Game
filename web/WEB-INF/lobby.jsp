@@ -48,7 +48,9 @@
                 type: "GET",
                 url: "/logout",
                 success: function () {
-                    console.log("user logged out");
+                    console.log("redirected to login.");
+                    window.location.replace("../logIn");
+
                 }
             });
         }
