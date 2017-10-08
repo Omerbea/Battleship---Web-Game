@@ -4,7 +4,7 @@ public class GameLobbyDetailes {
     int boardSize;
     String typeGame;
     boolean isHaveRegisterPlayer;
-    GameManager gameManager ;
+    transient GameManager gameManager ;
     public GameLobbyDetailes (String i_name, String i_playerNameThatLoadedCurrentGame, int i_boardSize, String i_typeGame, GameManager i_gameManager){
         this.name =i_name;
         this.playerNameThatLoadedCurrentGame = i_playerNameThatLoadedCurrentGame;

@@ -30,7 +30,7 @@ public class loadGameServlet extends HttpServlet {
         InputStream fileContent = filePart.getInputStream();
         System.out.println(fileContent);
         //TODO: change the path to be relative path
-        File file =new File("C:\\jonathan benedek\\computer science\\java\\BattleShipEx3\\Battleship---Web-Game\\Battleship---Web-Game\\SaveFileUploaded.xml");
+        File file =new File("C:\\BattleShip - Tomcat\\SaveFileUploaded.xml");
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, file.toPath());
         }
@@ -38,7 +38,7 @@ public class loadGameServlet extends HttpServlet {
         try {
             LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
 
-            lobbyManager.setNewGame("C:\\jonathan benedek\\computer science\\java\\BattleShipEx3\\Battleship---Web-Game\\Battleship---Web-Game\\SaveFileUploaded.xml", gameName, userName);
+            lobbyManager.setNewGame("C:\\BattleShip - Tomcat\\SaveFileUploaded.xml", gameName, userName);
             //gameManager.loadFile(file.getAbsolutePath());
             resp.sendRedirect(req.getContextPath() + "/lobby");
         }
