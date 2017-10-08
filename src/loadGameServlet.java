@@ -1,10 +1,7 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +16,16 @@ import java.util.Iterator;
 public class loadGameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    //handle session
+        HttpSession session = req.getSession(true);
+        if (session.isNew()){
+            System.out.println("the user new in load game. need to log out the user");
+            //TODO: log out the user
+        }
+    //get params
+        String userName = (String)session.getAttribute("userName");
+        String gameName = req.getParameter("nameGame");
+    //handle file xml and save it
         Part filePart = req.getPart("gameFile");
         InputStream fileContent = filePart.getInputStream();
         System.out.println(fileContent);
@@ -27,13 +34,17 @@ public class loadGameServlet extends HttpServlet {
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, file.toPath());
         }
-        GameManager gameManager = new GameManager();
+    // do vaildation to file and if the file is valid add to the system
         try {
-            gameManager.loadFile(file.getAbsolutePath());
+            LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
 
+            lobbyManager.setNewGame("C:\\jonathan benedek\\computer science\\java\\BattleShipEx3\\Battleship---Web-Game\\Battleship---Web-Game\\SaveFileUploaded.xml", gameName, userName);
+            //gameManager.loadFile(file.getAbsolutePath());
+            resp.sendRedirect(req.getContextPath() + "/lobby");
         }
         catch (Exception e){
-
+            System.out.println("ERROR!");
+            System.out.println(e.getMessage());
         }
         /*Part filePart = req.getPart("gameFile");
         InputStream fileContent = filePart.getInputStream();

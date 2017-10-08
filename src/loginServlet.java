@@ -11,6 +11,11 @@ import java.util.*;
 public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
+        if (lobbyManager == null){
+            lobbyManager = new LobbyManager();
+            getServletContext().setAttribute("lobbyManager",lobbyManager);
+        }
 
         HttpSession session = request.getSession(true);
 
@@ -18,6 +23,7 @@ public class loginServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/logIn.jsp").include(request, response);
             session.setMaxInactiveInterval(20);
             System.out.println("new user");
+            session.setAttribute("userName", getServletContext().getContext("userName"));
         } else {
             response.sendRedirect(request.getContextPath() + "/lobby");
             System.out.println("user already in the system redirecting to lobby");
@@ -30,10 +36,8 @@ public class loginServlet extends HttpServlet {
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
         System.out.println(userName +" " + password);
-
         HttpSession session = req.getSession(true);
         session.setAttribute("userName" , userName);
-
         resp.sendRedirect(req.getContextPath() + "/lobby");
     }
 }
