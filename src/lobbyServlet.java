@@ -12,6 +12,14 @@ import java.io.IOException;
 public class lobbyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
+        HttpSession session = req.getSession();
+
+        try {
+            lobbyManager.addPlayerToList((String)session.getAttribute("userName"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
     }
 

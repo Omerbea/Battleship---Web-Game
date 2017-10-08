@@ -32,7 +32,11 @@ public class Factory {
         }
 
         Player[] PlayersArray  = new Player[2];
-        int numberOfMines = GameData.getMine().getAmount();
+        int numberOfMines = 0 ;
+
+        if(GameData.getGameType().equals("ADVANCE")) {
+            numberOfMines = GameData.getMine().getAmount();
+        }
 
         for(int player = 0 ; player < 2 ; player++) {
             Map<String, LinkedList<GameTool>> playerGameTools = new HashMap<>();
