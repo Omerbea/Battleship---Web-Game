@@ -38,6 +38,29 @@ public class LobbyManager {
         return games;
     }
 
+    public void addPlayerToList(String name) throws Exception {
+        if(isPlayerExist(name)){
+            throw new Exception("Player already exists");
+        }
+        players.add(name);
+    }
+
+    public void removePlayerFromList(String name) {
+        players.remove(name);
+
+    }
+
+    private boolean isPlayerExist(String name) {
+        if(players.stream().filter(playerName -> playerName.equals(name)).count() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public LinkedList<String> getPlayers() {
+        return players;
+    }
+
     /*
     public LinkedList<String> getPlayesList
 

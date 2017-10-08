@@ -11,20 +11,19 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-@WebServlet(name = "gameLobbyDetailesServlet" , urlPatterns = {"/activeGamesData"})
-public class gameLobbyDetailesServlet extends HttpServlet{
+@WebServlet(name = "activePlayersServlet" , urlPatterns = "/activePlayersData")
+
+public class activePlayersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
-        HashMap<String, GameLobbyDetailes> activeGame = lobbyManager.getGames();
         LinkedList<String> activePlayers = lobbyManager.getPlayers();
 
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         // start building json
         Gson gson = new GsonBuilder().create();
-        gson.toJson(activeGame , writer);
+        gson.toJson(activePlayers , writer);
 
     }
 }
-

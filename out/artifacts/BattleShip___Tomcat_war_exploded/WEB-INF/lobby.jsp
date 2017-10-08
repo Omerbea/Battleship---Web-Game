@@ -28,9 +28,11 @@
             </div>
             <div class="activePlayers">
                 <table>
-                    <tr>
-                        <th>Active Players</th>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>Active Players</th>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div class="uploadFile">
@@ -56,8 +58,19 @@
         }
         $.ajax({
             type: "GET" ,
-            url : "/lobbyData" ,
+            url : "/activePlayersData" ,
             success : function(result) {
+                console.log(result);
+                $.each(result,function(index , element) {
+                    $('.activePlayers tbody').append("<tr><td>"+element+"</td></tr>");
+                });
+            }
+        });
+        $.ajax({
+            type: "GET" ,
+            url : "/activeGamesData" ,
+            success : function(result) {
+                console.log(result);
                 $.each(result,function(index , element) {
                     $('.gamesList tbody').append("<tr><td>"+element.name+"</td>" +
                     "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
