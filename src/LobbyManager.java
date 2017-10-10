@@ -23,6 +23,10 @@ public class LobbyManager {
         }
     }
 
+    public GameLobbyDetailes getGameLobbyDetailsByName(String name) {
+        return games.get(name);
+    }
+
     public GameManager getGameManagerByName(String name){
         return games.get(name).getGameManager();
     }

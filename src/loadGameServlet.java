@@ -30,7 +30,7 @@ public class loadGameServlet extends HttpServlet {
         InputStream fileContent = filePart.getInputStream();
         System.out.println(fileContent);
         //TODO: change the path to be relative path
-        File file =new File("SaveFileUploaded2.xml");
+        File file =new File("SaveFileUploaded4.xml");
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, file.toPath());
         }
