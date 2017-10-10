@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 @WebServlet(name = "activePlayersServlet" , urlPatterns = "/activePlayersData")
-
 public class activePlayersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

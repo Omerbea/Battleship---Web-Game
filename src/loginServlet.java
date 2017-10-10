@@ -12,13 +12,14 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
+        HttpSession session;
         if (lobbyManager == null){
             lobbyManager = new LobbyManager();
             getServletContext().setAttribute("lobbyManager",lobbyManager);
         }
 
-        HttpSession session = request.getSession(true);
 
+        session = request.getSession(true);
         if(session.isNew()) {
             request.getRequestDispatcher("/WEB-INF/logIn.jsp").include(request, response);
             session.setMaxInactiveInterval(20);

@@ -12,11 +12,15 @@ import java.util.LinkedList;
 public class logoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logOut(req,resp);
+    }
+
+
+    public void logOut (HttpServletRequest req, HttpServletResponse resp){
         HttpSession session = req.getSession(false);
 
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         lobbyManager.removePlayerFromList((String)session.getAttribute("userName"));
-
         if (session != null) {
             session.invalidate();
         }
