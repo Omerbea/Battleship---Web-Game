@@ -44,6 +44,11 @@
                         <input name="nameGame" type="text" />
                     </P>
                     <input type="submit"/>
+                    <p>
+                        <div class="errorBoxLoadFile">
+
+                        </div>
+                    </p>
                 </form>
             </div>
         </div>
@@ -83,5 +88,43 @@
                 });
             }
         });
+
+
+        $.ajax({
+            type: "GET" ,
+            url : "/errorCodeLoadGame" ,
+            success : function(result) {
+                console.log ("errorCoseLoadGame():")
+                console.log(result);
+                if (result ==''){
+                    console.log("no error")
+
+                }
+                else {
+                    console.log ("error load..")
+                    $('.errorBoxLoadFile').append("<label>" + result + "</label>");
+                }
+            }
+        });
+
+
+        /*
+            var myRequest ;
+            if (window.XMLHttpRequest){
+                console.log("yes");
+                myRequest = new XMLHttpRequest();
+            }
+            else{
+                console.log("no");
+                myRequest = window.ActiveXObject (microsoft.XMLHttpRequest);
+            }
+            myRequest.onreadystatechange= function () {
+                console.log("getErrorCode()");
+                console.log(this.readyState);
+                console.log(this.status);
+                if (this.readyState ==4 && this.status == 2){
+                    console.log("duplicate name");
+                }
+            }*/
     </script>
 </html>

@@ -14,12 +14,19 @@ public class lobbyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         HttpSession session = req.getSession();
+        String status = (String) session.getAttribute("isFirstTime");
+        if (status != null && status =="no"){
 
-        try {
-            lobbyManager.addPlayerToList((String)session.getAttribute("userName"));
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        else{
+            try {
+                lobbyManager.addPlayerToList((String)session.getAttribute("userName"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            session.setAttribute("isFirstTime", "no");
+        }
+
         req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
     }
 

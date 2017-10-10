@@ -55,10 +55,17 @@ public class LobbyManager {
     }
 
     private boolean isPlayerExist(String name) {
+        if (this.players.contains(name)){
+            return true;
+        }
+        else{
+            return  false;
+        }
+        /*
         if(players.stream().filter(playerName -> playerName.equals(name)).count() > 0) {
             return true;
         }
-        return false;
+        return false;*/
     }
 
     public LinkedList<String> getPlayers() {

@@ -17,10 +17,17 @@ public class loadGameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     //handle session
-        HttpSession session = req.getSession(true);
-        if (session.isNew()){
+        HttpSession session = req.getSession(false);
+        if (session == null ||session.isNew()){
             System.out.println("the user new in load game. need to log out the user");
             //TODO: log out the user
+            //logoutServlet logOut= new logoutServlet();
+            //logOut.logOut(req,resp);
+            //return;
+            logoutServlet logOutServlet = new logoutServlet();
+            //logOutServlet.logOut(req,resp);
+            resp.sendRedirect(req.getContextPath() + "/logIn");
+            return;
         }
     //get params
         String userName = (String)session.getAttribute("userName");
@@ -40,14 +47,27 @@ public class loadGameServlet extends HttpServlet {
 
             lobbyManager.setNewGame(file.toPath().toString(), gameName, userName);
             //gameManager.loadFile(file.getAbsolutePath());
-            resp.sendRedirect(req.getContextPath() + "/lobby");
+
 
             Files.deleteIfExists(file.toPath());
         }
         catch (Exception e){
+            Files.deleteIfExists(file.toPath());
             System.out.println("ERROR!");
             System.out.println(e.getMessage());
+            session.setAttribute("errorLoadfile", e.getMessage());
+            //req.setAttribute("errorLoadfile", e.getMessage());
+            //resp.sendRedirect(req.getContextPath()+ "/lobby");
+            resp.setStatus(2);
+            resp.sendRedirect(req.getContextPath() + "/lobby");
+            return;
+
         }
+        session.setAttribute("errorLoadfile", "upload file successfully...");
+        resp.setStatus(0);
+        resp.sendRedirect(req.getContextPath() + "/lobby");
+        //req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
+
         /*Part filePart = req.getPart("gameFile");
         InputStream fileContent = filePart.getInputStream();
         OutputStream out = null;
