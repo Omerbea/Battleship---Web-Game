@@ -80,7 +80,7 @@
             success : function(result) {
                 console.log(result);
                 $.each(result,function(index , element) {
-                    $('.gamesList tbody').append("<tr><td><a href=\"gameRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
+                    $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
                     "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
                     "<td>"+element.boardSize+"</td>" +
                     "<td>"+element.typeGame+"</td>" +

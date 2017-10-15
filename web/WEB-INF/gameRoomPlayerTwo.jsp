@@ -6,13 +6,13 @@
     <title>Game Room</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">Game Room</div>
-        <div class="myBoardSection"></div>
-         <div class="rivalBoardSection"></div>
-        <div class="statSection">Stats</div>
-        <div class="toolSection">Tools section</div>
-    </div>
+<div class="container">
+    <div class="header">Game Room Player2</div>
+    <div class="myBoardSection"></div>
+    <div class="rivalBoardSection"></div>
+    <div class="statSection">Stats</div>
+    <div class="toolSection">Tools section</div>
+</div>
 </body>
 
 <script type="text/javascript">

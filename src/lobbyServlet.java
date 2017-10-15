@@ -22,7 +22,7 @@ public class lobbyServlet extends HttpServlet {
             try {
                 lobbyManager.addPlayerToList((String)session.getAttribute("userName"));
             } catch (Exception e) {
-                e.printStackTrace();
+                req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
             }
             session.setAttribute("isFirstTime", "no");
         }

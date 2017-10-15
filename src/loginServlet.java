@@ -19,14 +19,16 @@ public class loginServlet extends HttpServlet {
         }
 
 
-        session = request.getSession(true);
-        String userName= (String) session.getAttribute("userName");
-        if(session.isNew() && userName == null) {
-            request.getRequestDispatcher("/WEB-INF/logIn.jsp").include(request, response);
+        session = request.getSession(false);
+        //String userName= (String) session.getAttribute("userName");
+        if(session == null) {
+
+            session = request.getSession(true);
             session.setMaxInactiveInterval(20);
             System.out.println("new user");
             session.setAttribute("userName", getServletContext().getContext("userName"));
-        } else {
+            request.getRequestDispatcher("/WEB-INF/logIn.jsp").include(request, response);
+        } else{
             response.sendRedirect(request.getContextPath() + "/lobby");
             System.out.println("user already in the system redirecting to lobby");
         }

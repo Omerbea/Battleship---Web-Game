@@ -28,6 +28,10 @@ public class GameLobbyDetailes {
         playersEnteredGame--;
     }
 
+    public int getNumberOfPlayersInGame() {
+        return playersEnteredGame;
+    }
+
     public int amountOfPlayersInGame() {
         return playersEnteredGame;
     }

@@ -54,7 +54,7 @@ public class LobbyManager {
 
     }
 
-    private boolean isPlayerExist(String name) {
+    public boolean isPlayerExist(String name) {
         if (this.players.contains(name)){
             return true;
         }
