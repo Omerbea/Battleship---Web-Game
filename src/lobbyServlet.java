@@ -13,7 +13,10 @@ public class lobbyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
+        if (session == null){
+            req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+        }
         String status = (String) session.getAttribute("isFirstTime");
         if (status != null && status =="no"){
 

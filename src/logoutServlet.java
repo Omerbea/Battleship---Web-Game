@@ -21,7 +21,9 @@ public class logoutServlet extends HttpServlet {
 
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         if (session != null) {
+            lobbyManager.removePlayerFromList((String)req.getSession().getAttribute("userName"));
             session.invalidate();
+
         }
     }
 }
