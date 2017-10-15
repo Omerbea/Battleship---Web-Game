@@ -113,8 +113,8 @@
                 url : "/activePlayersData" ,
                 success : function(result) {
                     console.log(result);
+                    $('.activePlayers tbody td').remove();
                     $.each(result,function(index , element) {
-                        $('.activePlayers tbody td').remove();
                         $('.activePlayers tbody').append("<tr><td>"+element+"</td></tr>");
                     });
                 }
