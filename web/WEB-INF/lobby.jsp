@@ -107,24 +107,18 @@
             }
         });
 
-
-        /*
-            var myRequest ;
-            if (window.XMLHttpRequest){
-                console.log("yes");
-                myRequest = new XMLHttpRequest();
-            }
-            else{
-                console.log("no");
-                myRequest = window.ActiveXObject (microsoft.XMLHttpRequest);
-            }
-            myRequest.onreadystatechange= function () {
-                console.log("getErrorCode()");
-                console.log(this.readyState);
-                console.log(this.status);
-                if (this.readyState ==4 && this.status == 2){
-                    console.log("duplicate name");
+        var id = setInterval(function () {
+            $.ajax({
+                type: "GET" ,
+                url : "/activePlayersData" ,
+                success : function(result) {
+                    console.log(result);
+                    $.each(result,function(index , element) {
+                        $('.activePlayers tbody td').remove();
+                        $('.activePlayers tbody').append("<tr><td>"+element+"</td></tr>");
+                    });
                 }
-            }*/
+            });
+        }, 2000);
     </script>
 </html>

@@ -40,7 +40,12 @@ public class loginServlet extends HttpServlet {
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
         System.out.println(userName +" " + password);
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession(false);
+        if (session == null){
+            //TODO: handle with bug
+            System.out.println("ERROR!");
+            return;
+        }
         session.setAttribute("userName" , userName);
         resp.sendRedirect(req.getContextPath() + "/lobby");
     }
