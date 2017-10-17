@@ -4,16 +4,25 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 public class SessionListener implements HttpSessionListener {
-
+    @Override
     public void sessionCreated(HttpSessionEvent event) {
-        System.out.println("Session Created");
+        java.util.Date date = new java.util.Date();
+        System.out.println(date+ "   Session Created");
     }
-
+    @Override
     public void sessionDestroyed(HttpSessionEvent event) {
         //write your logic
-        LobbyManager lobbyManager = (LobbyManager) event.getSession().getAttribute("lobbyManager");
-        lobbyManager.removePlayerFromList((String)event.getSession().getAttribute("userName"));
-        //event.getSession().invalidate();
+        java.util.Date date = new java.util.Date();
+        System.out.println(date + "   Destroy session..");
+        String userName =(String) event.getSession().getAttribute("userName");
+        LobbyManager lobbyManager = (LobbyManager) event.getSession().getServletContext().getAttribute("lobbyManager");
+        if (lobbyManager == null){
+            System.out.println("Warnnig: at sessionDestroyed lobbyManager is null");
+            return;
+
+        }
+        lobbyManager.removePlayerFromList(userName);
+        event.getSession().invalidate();
         System.out.println("Session Destroyed");
     }
 }

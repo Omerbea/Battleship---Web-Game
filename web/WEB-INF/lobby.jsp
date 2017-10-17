@@ -64,33 +64,35 @@
                 }
             });
         }
-        $.ajax({
-            type: "GET" ,
-            url : "/activePlayersData" ,
-            success : function(result) {
-                console.log(result);
-                $.each(result,function(index , element) {
-                    $('.activePlayers tbody').append("<tr><td>"+element+"</td></tr>");
-                });
-            }
-        });
+
         $.ajax({
             type: "GET" ,
             url : "/activeGamesData" ,
             success : function(result) {
                 console.log(result);
+                $('.gamesList tbody td').remove();
                 $.each(result,function(index , element) {
                     $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
-                    "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
-                    "<td>"+element.boardSize+"</td>" +
-                    "<td>"+element.typeGame+"</td>" +
-                    "<td>"+element.isHaveRegisterPlayer+"</td>");
+                        "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
+                        "<td>"+element.boardSize+"</td>" +
+                        "<td>"+element.typeGame+"</td>" +
+                        "<td>"+element.isHaveRegisterPlayer+"</td>");
                 });
             }
         });
 
-
         $.ajax({
+            type: "GET" ,
+            url : "/activePlayersData" ,
+            success : function(result) {
+                console.log(result);
+                $('.activePlayers tbody td').remove();
+                $.each(result,function(index , element) {
+                    $('.activePlayers tbody').append("<tr><td>"+element+"</td></tr>");
+                });
+            }
+        });
+         $.ajax({
             type: "GET" ,
             url : "/errorCodeLoadGame" ,
             success : function(result) {
@@ -107,7 +109,7 @@
             }
         });
 
-        var id = setInterval(function () {
+        var intervalActivatePlayers = setInterval(function () {
             $.ajax({
                 type: "GET" ,
                 url : "/activePlayersData" ,
@@ -120,5 +122,23 @@
                 }
             });
         }, 2000);
+
+        var intervalActivateGame = setInterval(function () {
+            $.ajax({
+                type: "GET" ,
+                url : "/activeGamesData" ,
+                success : function(result) {
+                    console.log(result);
+                    $('.gamesList tbody td').remove();
+                    $.each(result,function(index , element) {
+                        $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
+                            "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
+                            "<td>"+element.boardSize+"</td>" +
+                            "<td>"+element.typeGame+"</td>" +
+                            "<td>"+element.isHaveRegisterPlayer+"</td>");
+                    });
+                }
+            });
+        }, 200);
     </script>
 </html>

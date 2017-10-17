@@ -16,7 +16,14 @@ public class lobbyServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (session == null){
             req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+            return;
         }
+        String userName = (String)session.getAttribute("userName");
+        if (userName == null){
+            req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+            return;
+        }
+        
         String status = (String) session.getAttribute("isFirstTime");
         if (status != null && status =="no"){
 

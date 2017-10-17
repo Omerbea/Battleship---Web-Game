@@ -24,7 +24,7 @@ public class loginServlet extends HttpServlet {
         if(session == null) {
 
             session = request.getSession(true);
-            session.setMaxInactiveInterval(20);
+            //session.setMaxInactiveInterval(20);
             System.out.println("new user");
             session.setAttribute("userName", getServletContext().getContext("userName"));
             request.getRequestDispatcher("/WEB-INF/logIn.jsp").include(request, response);

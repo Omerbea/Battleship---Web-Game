@@ -14,7 +14,10 @@ import java.io.PrintWriter;
 public class EerrorCodeLoadGame extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession(false);
+        if (session == null){
+            System.out.println("Error");
+        }
         if (session.isNew()){
             System.out.println("the user new in load game. need to log out the user");
             //TODO: log out the user
