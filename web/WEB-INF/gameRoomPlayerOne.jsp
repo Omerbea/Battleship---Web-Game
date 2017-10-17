@@ -39,7 +39,8 @@
     function createTablesForElement(element) {
 
         var myTableDiv = element;
-        var boardSize = GetURLParameter('boardSize');
+        var boardSize = ${requestScope.get("boardSize")};
+        console.log("boardsize = "+ boardSize);
         var table = document.createElement('TABLE');
         table.border='1';
 

@@ -23,7 +23,7 @@ public class lobbyServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
             return;
         }
-        
+
         String status = (String) session.getAttribute("isFirstTime");
         if (status != null && status =="no"){
 

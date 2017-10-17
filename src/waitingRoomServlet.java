@@ -18,6 +18,9 @@ public class waitingRoomServlet extends HttpServlet {
         GameManager currentManager = lobbyManager.getGameManagerByName((String)req.getParameter("gameName"));
         req.setAttribute("gameName" , (String)req.getParameter("gameName") );
         HttpSession session = req.getSession(false);
+        if (session == null){
+            //TODO: handle witth error . go to log-in page
+        }
         if(session.getAttribute("playerNumber") == null){
             System.out.println(playerNumber);
             session.setAttribute("playerNumber" , playerNumber++);
@@ -26,6 +29,8 @@ public class waitingRoomServlet extends HttpServlet {
         if(currentDetails.amountOfPlayersInGame() <= 1) {
             req.getRequestDispatcher("/WEB-INF/waitingRoom.jsp").include(req, resp);
         } else {
+            int boardSize = currentManager.getBoardSize();
+            req.setAttribute("boardSize", boardSize);
             if((int)session.getAttribute("playerNumber") == 1) {
                 req.getRequestDispatcher("/WEB-INF/gameRoomPlayerOne.jsp").include(req, resp);
             } else {
