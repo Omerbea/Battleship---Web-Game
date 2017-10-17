@@ -23,6 +23,7 @@ public class activePlayersServlet extends HttpServlet {
         // start building json
         Gson gson = new GsonBuilder().create();
         gson.toJson(activePlayers , writer);
+        return;
 
     }
 }

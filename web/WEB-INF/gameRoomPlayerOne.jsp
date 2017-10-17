@@ -23,21 +23,34 @@
 
     });
 
+    function GetURLParameter(sParam){
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam)
+            {
+                return sParameterName[1];
+            }
+        }
+    };
+
     function createTablesForElement(element) {
 
         var myTableDiv = element;
-
+        var boardSize = GetURLParameter('boardSize');
         var table = document.createElement('TABLE');
         table.border='1';
 
         var tableBody = document.createElement('TBODY');
         table.appendChild(tableBody);
 
-        for (var i=0; i<'${boardSize}'; i++){
+        for (var i=0; i<boardSize; i++){
             var tr = document.createElement('TR');
             tableBody.appendChild(tr);
 
-            for (var j=0; j<'${boardSize}'; j++){
+            for (var j=0; j<boardSize; j++){
                 var td = document.createElement('TD');
                 td.width='75';
 
@@ -46,7 +59,7 @@
             }
         }
         myTableDiv.appendChild(table);
-        $('myBoardSection').add
+        //$('myBoardSection').add
     }
 </script>
 </html>
