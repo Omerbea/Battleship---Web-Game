@@ -25,6 +25,8 @@ public class gameLobbyDetailesServlet extends HttpServlet{
         Gson gson = new GsonBuilder().create();
         gson.toJson(activeGame , writer);
 
+        return;
+
     }
 }
 
