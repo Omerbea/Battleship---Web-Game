@@ -7,10 +7,14 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">Game Room Player2</div>
+    <div class="header">Game Room Player2 <button class="logout-btn">logout</button></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
-    <div class="statSection">Stats</div>
+    <div class="statSection">
+        <br><label>Score : </label><label class="score">0</label><br>
+        <br><label>Avg Time : </label><label class="time">0</label><br>
+        <br><label>Turn Played : </label><label class="turns">0</label><br>
+    </div>
     <div class="toolSection">Tools section</div>
 </div>
 </body>
@@ -20,14 +24,18 @@
         createTablesForElement(document.getElementsByClassName('myBoardSection')[0]);
         createTablesForElement(document.getElementsByClassName('rivalBoardSection')[0]);
 
+
     });
 
     function createTablesForElement(element) {
 
         var myTableDiv = element;
-        var boardSize = GetURLParameter('boardSize');
+        var boardSize = ${requestScope.get("boardSize")};
+        console.log("boardsize = "+ boardSize);
         var table = document.createElement('TABLE');
         table.border='1';
+        table.width = '100%';
+        table.height = '100%';
 
         var tableBody = document.createElement('TBODY');
         table.appendChild(tableBody);
@@ -39,13 +47,14 @@
             for (var j=0; j<boardSize; j++){
                 var td = document.createElement('TD');
                 td.width='75';
+                td.height='60';
 
                 td.appendChild(document.createTextNode("Cell " + i + "," + j));
                 tr.appendChild(td);
             }
         }
         myTableDiv.appendChild(table);
-      //  $('myBoardSection').add
+        //$('myBoardSection').add
     }
 </script>
 </html>

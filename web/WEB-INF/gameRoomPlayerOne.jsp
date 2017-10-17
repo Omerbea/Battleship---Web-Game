@@ -7,10 +7,14 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">Game Room Player1</div>
+    <div class="header">Game Room Player1 <button class="logout-btn">logout</button></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
-    <div class="statSection">Stats</div>
+    <div class="statSection">
+        <br><label>Score : </label><label class="score">0</label><br>
+        <br><label>Avg Time : </label><label class="time">0</label><br>
+        <br><label>Turn Played : </label><label class="turns">0</label><br>
+    </div>
     <div class="toolSection">Tools section</div>
 </div>
 </body>
@@ -23,19 +27,6 @@
 
     });
 
-    function GetURLParameter(sParam){
-        var sPageURL = window.location.search.substring(1);
-        var sURLVariables = sPageURL.split('&');
-        for (var i = 0; i < sURLVariables.length; i++)
-        {
-            var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam)
-            {
-                return sParameterName[1];
-            }
-        }
-    };
-
     function createTablesForElement(element) {
 
         var myTableDiv = element;
@@ -43,6 +34,8 @@
         console.log("boardsize = "+ boardSize);
         var table = document.createElement('TABLE');
         table.border='1';
+        table.width = '100%';
+        table.height = '100%';
 
         var tableBody = document.createElement('TBODY');
         table.appendChild(tableBody);
@@ -54,6 +47,7 @@
             for (var j=0; j<boardSize; j++){
                 var td = document.createElement('TD');
                 td.width='75';
+                td.height='60';
 
                 td.appendChild(document.createTextNode("Cell " + i + "," + j));
                 tr.appendChild(td);
