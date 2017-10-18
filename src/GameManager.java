@@ -539,6 +539,14 @@ public class GameManager {
         return  true;
     }
 
+    public char[][] getBoardByPlayerNumber (int plyaer){
+         return this.players[plyaer].getMyBoardForPrint();
+    }
+
+    public char[][] getRivalBoardByPlayerNumber ( int player){
+        return this.players[player].getRivalBoard();
+    }
+
     private boolean loadGame (String xmlPath) throws Exception {
         if ( this.isGameRun){
             //TODO: present error to the ui and back to the loop
