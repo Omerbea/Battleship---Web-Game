@@ -1,2 +1,53 @@
 public class Statistics {
+    private int score = 0;
+    private int missNum = 0;
+    private String avargeTimeTurn ;
+    private int hits =0;
+    private int numofMines =0;
+
+    public int getHits() {
+        return hits;
+    }
+
+    public String getAvargeTimeTurn() {
+        return avargeTimeTurn;
+    }
+
+
+
+    public int getNumofMines() {
+        return numofMines;
+    }
+
+    public int getMissNum() {
+        return missNum;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setMissNum(int missNum) {
+        this.missNum = missNum;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
+    }
+
+    public void setAvargeTimeTurn(String avargeTimeTurn) {
+        this.avargeTimeTurn = avargeTimeTurn;
+    }
+
+
+
+    public void setNumofMines(int numofMines) {
+        this.numofMines = numofMines;
+    }
 }

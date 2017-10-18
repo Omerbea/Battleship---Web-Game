@@ -70,6 +70,11 @@ public class GameManager {
     public SimpleStringProperty propAverageTimeTurnCurrentPlayer(int player){
         return players[player].propAverageTimeTurnCurrentPlayer();
     }
+
+    public int getWhoPlay() {
+        return whoPlay;
+    }
+
     public SimpleStringProperty propMissCurrntPlayer(int player){
         return players[player].propMissCurrntPlayer();
     }
@@ -599,5 +604,14 @@ public class GameManager {
         return factory.getMineList(players[whoPlay].myBoard);
     }
 
+    public Statistics getGameStatisticByPlayer(int player) {
+         Statistics statistics = new Statistics();
+         statistics.setAvargeTimeTurn(players[player].getAvargeTime());
+         statistics.setHits(players[player].getHits());
+         statistics.setNumofMines(players[player].getNumOfMines());
+         statistics.setScore(players[player].getScore());
+         statistics.setMissNum(players[player].getMissNum());
+         return  statistics;
+    }
 }
 

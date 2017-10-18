@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -6,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "ExecuteMoveServlet" , urlPatterns = {"/ExecuteMoveServlet"})
 
@@ -32,9 +36,19 @@ public class ExecuteMoveServlet extends HttpServlet {
         char [][] rivalBoard = gameManager.getRivalBoardByPlayerNumber(player);
 
         // get ready statistics
+        Statistics statistics = gameManager.getGameStatisticByPlayer(player);
 
+        //is your turn or not
+        boolean isMyTurn = false;
+        if ( player == gameManager.getWhoPlay()){
+            isMyTurn = true;
+        }
 
-        //get is your turn or not
+        // prepare response
+        PrintWriter writer = resp.getWriter();
+        Gson gson = new GsonBuilder().create();
+        gson.toJson(statistics , writer);
+        gson.toJson(isMyTurn,writer);
 
 
     }
