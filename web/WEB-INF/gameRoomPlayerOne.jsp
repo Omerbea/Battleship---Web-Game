@@ -37,6 +37,11 @@
         table.width = '100%';
         table.height = '100%';
 
+        var cellBtn = $('<button/>' , {
+            text : 'click' ,
+            click : function () {console.log('clicked')}
+        });
+
         var tableBody = document.createElement('TBODY');
         table.appendChild(tableBody);
 
@@ -48,7 +53,7 @@
                 var td = document.createElement('TD');
                 td.width='75';
                 td.height='60';
-
+                td.appendChild(cellBtn);
                 td.appendChild(document.createTextNode("Cell " + i + "," + j));
                 tr.appendChild(td);
             }
