@@ -27,6 +27,18 @@
 
     });
 
+    function getData() {
+        $.ajax({
+            type: "GET" ,
+            url : "/ExecuteMoveServlet?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 1 ,
+            success : function(result) {
+                console.log(result);
+            }
+        });
+
+        //console.log("Row :" + this.parentNode.parentNode.rowIndex);
+    }
+
     function createTablesForElement(element) {
 
         var myTableDiv = element;
@@ -36,6 +48,7 @@
         table.border='1';
         table.width = '100%';
         table.height = '100%';
+
 
         var tableBody = document.createElement('TBODY');
         table.appendChild(tableBody);
@@ -48,8 +61,12 @@
                 var td = document.createElement('TD');
                 td.width='75';
                 td.height='60';
-
-                td.appendChild(document.createTextNode("Cell " + i + "," + j));
+                var cellBtn = document.createElement('input');
+                cellBtn.type = "button" ;
+                cellBtn.style.height= '100%';
+                cellBtn.style.width= '100%';
+                cellBtn.addEventListener('click' , getData , false);
+                td.appendChild(cellBtn);
                 tr.appendChild(td);
             }
         }
