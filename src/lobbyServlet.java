@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.corba.se.spi.ior.ObjectKey;
 
 import javax.servlet.ServletException;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "lobbyServlet" , urlPatterns = {"/lobby"})
 public class lobbyServlet extends HttpServlet {
@@ -32,7 +35,15 @@ public class lobbyServlet extends HttpServlet {
             try {
                 lobbyManager.addPlayerToList((String)session.getAttribute("userName"));
             } catch (Exception e) {
+                session.invalidate();
+                resp.setContentType("application/json");
+                PrintWriter writer = resp.getWriter();
+                // start building json
+                Gson gson = new GsonBuilder().create();
+                String errMsg = e.getMessage();
+                gson.toJson("errMsg:"+errMsg , writer);
                 req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+                return;
             }
             session.setAttribute("isFirstTime", "no");
         }

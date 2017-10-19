@@ -1,3 +1,4 @@
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,6 +45,7 @@ public class LobbyManager {
 
     public void addPlayerToList(String name) throws Exception {
         if(isPlayerExist(name)){
+
             throw new Exception("Player already exists");
         }
         players.add(name);

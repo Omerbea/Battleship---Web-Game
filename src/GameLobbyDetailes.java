@@ -3,7 +3,7 @@ public class GameLobbyDetailes {
     String playerNameThatLoadedCurrentGame;
     int boardSize;
     String typeGame;
-    boolean isActiveGame;
+    String isActiveGame;
     transient GameManager gameManager ;
     private int playersEnteredGame = 0 ;
     public GameLobbyDetailes (String i_name, String i_playerNameThatLoadedCurrentGame, int i_boardSize, String i_typeGame, GameManager i_gameManager){
@@ -11,13 +11,13 @@ public class GameLobbyDetailes {
         this.playerNameThatLoadedCurrentGame = i_playerNameThatLoadedCurrentGame;
         this.boardSize = i_boardSize;
         this.typeGame = i_typeGame;
-        this.isActiveGame = false;
+        this.isActiveGame = "No";
         this.gameManager = i_gameManager;
 
     }
 
     public void setActiveGame() {
-        isActiveGame = true;
+        isActiveGame = "yes";
     }
 
     public void addPlayerEntered() {
