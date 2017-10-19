@@ -21,8 +21,8 @@
 
 <script type="text/javascript">
     $(function() {
-        createTablesForElement(document.getElementsByClassName('myBoardSection')[0]);
-        createTablesForElement(document.getElementsByClassName('rivalBoardSection')[0]);
+        createTablesForElement(document.getElementsByClassName('myBoardSection')[0] , true);
+        createTablesForElement(document.getElementsByClassName('rivalBoardSection')[0] , false);
 
 
     });
@@ -30,7 +30,8 @@
     function getData() {
         $.ajax({
             type: "GET" ,
-            url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 1 ,
+            url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 0 ,
+            //url:"/ExecuteMove",
             success : function(result) {
                 console.log(result);
             }
@@ -39,7 +40,7 @@
         //console.log("Row :" + this.parentNode.parentNode.rowIndex);
     }
 
-    function createTablesForElement(element) {
+    function createTablesForElement(element , isMyBoard) {
 
         var myTableDiv = element;
         var boardSize = ${requestScope.get("boardSize")};
@@ -65,7 +66,10 @@
                 cellBtn.type = "button" ;
                 cellBtn.style.height= '100%';
                 cellBtn.style.width= '100%';
-                cellBtn.addEventListener('click' , getData , false);
+                if(isMyBoard) {
+                    cellBtn.addEventListener('click', getData, false);
+
+                }
                 td.appendChild(cellBtn);
                 tr.appendChild(td);
             }
