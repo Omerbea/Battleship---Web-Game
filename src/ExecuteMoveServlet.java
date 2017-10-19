@@ -10,23 +10,38 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
-@WebServlet(name = "ExecuteMoveServlet" , urlPatterns = {"/ExecuteMoveServlet"})
+@WebServlet(name = "ExecuteMoveServlet" , urlPatterns = {"/ExecuteMove"})
 
 public class ExecuteMoveServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //get lobby manager
         LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
-        GameManager gameManager = lobbyManager.getGameManagerByName((String)req.getParameter("gameName"));
-        //TODO - start
-        int row = 0;
-        int column = 0;
+        if (lobbyManager == null){
+            System.out.println("Error lobby manager is null");
+            return;
+        }
+        // get row and column
+        String rowS = (String) req.getParameter("row") ;
+        int row = Integer.parseInt(rowS);
+        String columnS = (String) req.getParameter("col") ;
+        int column = Integer.parseInt(columnS);
+
+        // Handle Session
         HttpSession session = req.getSession(false);
         if (session == null){
             req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
             return;
         }
+
+        //get gameManager
+        String gameName = (String) session.getAttribute("gameName");
+        GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
+
         int player =  (int) session.getAttribute("playerNumber");
+        player--;
 
         //execute logic move
         gameManager.executeMove(row,column);
@@ -45,12 +60,15 @@ public class ExecuteMoveServlet extends HttpServlet {
         }
 
         // prepare response
+        ArrayList <Object> array4Response = new ArrayList<Object>();
+        array4Response.add(statistics);
+        array4Response.add(isMyTurn);
+        array4Response.add(playerBoard);
+        array4Response.add(rivalBoard);
+
         PrintWriter writer = resp.getWriter();
         Gson gson = new GsonBuilder().create();
-        gson.toJson(statistics , writer);
-        gson.toJson(isMyTurn,writer);
-
-
+        gson.toJson(array4Response , writer);
     }
 
 }

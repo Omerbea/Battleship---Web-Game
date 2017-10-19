@@ -15,12 +15,14 @@ public class waitingRoomServlet extends HttpServlet {
 
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         GameLobbyDetailes currentDetails = lobbyManager.getGameLobbyDetailsByName((String)req.getParameter("gameName"));
-        GameManager currentManager = lobbyManager.getGameManagerByName((String)req.getParameter("gameName"));
+        String gameName = (String)req.getParameter("gameName");
+        GameManager currentManager = lobbyManager.getGameManagerByName(gameName);
         req.setAttribute("gameName" , (String)req.getParameter("gameName") );
         HttpSession session = req.getSession(false);
         if (session == null){
             //TODO: handle witth error . go to log-in page
         }
+        session.setAttribute("gameName", gameName);
         if(session.getAttribute("playerNumber") == null){
             System.out.println(playerNumber);
             session.setAttribute("playerNumber" , playerNumber++);

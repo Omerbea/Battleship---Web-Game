@@ -30,7 +30,7 @@
     function getData() {
         $.ajax({
             type: "GET" ,
-            url : "/ExecuteMoveServlet?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 1 ,
+            url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 1 ,
             success : function(result) {
                 console.log(result);
             }
