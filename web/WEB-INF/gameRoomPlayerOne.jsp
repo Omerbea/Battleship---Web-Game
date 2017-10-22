@@ -59,6 +59,7 @@
         var boardSize = 5 ; // TODO : change board size to be dynamic
         var myBoard = data[2];
         var rivalBoard = data[3];
+        var statistics = data[0];
         var myUIBoard = $(".myBoard")[0];
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
@@ -74,6 +75,11 @@
                 jRivalCell.val(rivalBoard[i][j]);
             }
         }
+        console.log("current score:" + statistics.score);
+        //avargeTimeTurn
+
+        $(".score").html(statistics.score);
+        $(".time").html(statistics.avargeTimeTurn);
 
 
         if(isMyTurn) {
