@@ -611,6 +611,7 @@ public class GameManager {
          statistics.setNumofMines(players[player].getNumOfMines());
          statistics.setScore(players[player].getScore());
          statistics.setMissNum(players[player].getMissNum());
+         statistics.setNumOfTurns(players[player].getNumOfTurns());
          return  statistics;
     }
 }

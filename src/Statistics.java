@@ -4,7 +4,7 @@ public class Statistics {
     private String avargeTimeTurn ;
     private int hits =0;
     private int numofMines =0;
-
+    private int numOfTurns =0;
     public int getHits() {
         return hits;
     }
@@ -13,7 +13,13 @@ public class Statistics {
         return avargeTimeTurn;
     }
 
+    public int getNumOfTurns() {
+        return numOfTurns;
+    }
 
+    public void setNumOfTurns(int numOfTurns) {
+        this.numOfTurns = numOfTurns;
+    }
 
     public int getNumofMines() {
         return numofMines;
