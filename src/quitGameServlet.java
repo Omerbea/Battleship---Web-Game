@@ -21,6 +21,7 @@ public class quitGameServlet extends HttpServlet {
         //game manager
         LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
         GameManager gameManager = lobbyManager.getGameManagerByName((String)session.getAttribute("gameName"));
+
         gameManager.finishTheGame();
         session.removeAttribute("gameName");
         req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
