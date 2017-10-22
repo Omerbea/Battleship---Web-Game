@@ -41,8 +41,9 @@ public class lobbyServlet extends HttpServlet {
                 // start building json
                 Gson gson = new GsonBuilder().create();
                 String errMsg = e.getMessage();
-                gson.toJson("errMsg:"+errMsg , writer);
-                req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+                gson.toJson(errMsg,writer);
+                req.setAttribute("errMsg", errMsg);
+                req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req, resp);
                 return;
             }
             session.setAttribute("isFirstTime", "no");
