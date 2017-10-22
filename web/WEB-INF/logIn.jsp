@@ -18,6 +18,9 @@
                 <label> password: </label>
                 <input  name="password" type=password />
                 <input type="submit" />
+                <% if((String)request.getAttribute("errMsg") != null) { %>
+                    <label><%=(String)request.getAttribute("errMsg")%></label>
+                <%}%>
             </form>
         </div>
     </div>
@@ -33,6 +36,6 @@
              console.log(errMsg);
 
          }
-         getErrMsg();
+         //getErrMsg();
     </script>
 </html>

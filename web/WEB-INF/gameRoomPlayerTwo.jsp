@@ -21,14 +21,16 @@
 
 <script type="text/javascript">
 
-
-
+    var idPullingIsNotMyTurn =0;
+    var gIsMyTurn = 0;
     $(function() {
         createTablesForElement(document.getElementsByClassName('myBoardSection')[0] , true);
         createTablesForElement(document.getElementsByClassName('rivalBoardSection')[0] , false);
 
 
+
     });
+
 
     $(function() {
         $.ajax({
@@ -62,6 +64,8 @@
         var myUIBoard = $(".myBoard")[0];
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
+        console.log('================================')
+        gIsMyTurn = data[1];
         for(var i = 0 ; i < boardSize ; i++) {
             for(var j = 0 ; j < boardSize ; j++) {
                 var myCell = (myUIBoard.rows[i].cells[j]).childNodes[0];
@@ -78,6 +82,7 @@
             console.log("its your turn");
         } else {
             console.log("its NOT your turn");
+            pullingIsMyTurn();
         }
 
 
@@ -125,13 +130,32 @@
             }
         }
         myTableDiv.appendChild(table);
-/*
-        var txtLabel = documnet.createElement('label');
-        txtLabel.style.display = "inline-flex";
-        txtLabel.style.padding = '40px';
-        myTableDiv.appendChild(txtLabel);*/
-
         //$('myBoardSection').add
+    }
+    var countForDebug =0;
+    function pullingIsMyTurn() {
+        console.log("pullingIsMyTurn count : "+ countForDebug);
+        countForDebug++;
+        idPullingIsNotMyTurn = setInterval(function () {
+            if (gIsMyTurn) {
+                // its your turn
+                console.log("my turn ");
+                clearInterval(idPullingIsNotMyTurn);
+            } else {
+                console.log("not my turn");
+                $.ajax({
+                    type: "GET",
+                    url: "/ExecuteMove",
+                    success: function (result) {
+                        gIsMyTurn = result[1]
+                        console.log("gIsMyTurn= " + gIsMyTurn);
+                    }
+
+                });
+            }
+        },2000);
+        console.log("call to pullingIsMyTurn 1");
+        //pullingIsMyTurn();
     }
 </script>
 </html>

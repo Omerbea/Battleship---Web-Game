@@ -27,9 +27,6 @@
     $(function() {
         createTablesForElement(document.getElementsByClassName('myBoardSection')[0] , true);
         createTablesForElement(document.getElementsByClassName('rivalBoardSection')[0] , false);
-
-
-
     });
 
 

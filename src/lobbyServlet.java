@@ -42,6 +42,7 @@ public class lobbyServlet extends HttpServlet {
                 String errMsg = e.getMessage();
                 req.setAttribute("errMsg", errMsg);
                 System.out.println("ErrorMsg:"+ errMsg);
+
                 req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req, resp);
                 return;
             }
