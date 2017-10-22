@@ -21,12 +21,26 @@
 </body>
 
 <script type="text/javascript">
+
+
+
     $(function() {
         createTablesForElement(document.getElementsByClassName('myBoardSection')[0] , true);
         createTablesForElement(document.getElementsByClassName('rivalBoardSection')[0] , false);
 
 
     });
+
+    $(function() {
+        $.ajax({
+            type: "GET" ,
+            url : "/ExecuteMove",
+            //url:"/ExecuteMove",
+            success : function(result) {
+                updateUiData(result);
+            }
+        });
+    })
 
     function getData() {
         $.ajax({
@@ -35,6 +49,7 @@
             //url:"/ExecuteMove",
             success : function(result) {
                 updateUiData(result);
+                console.log(result);
             }
         });
 
@@ -42,15 +57,30 @@
 
     function updateUiData(data) {
         //updating boards
-        var board = data[2];
-        var table = $(".myBoard")[0];
-        console.log("board length :" + board.length);
-        for(var i = 0 ; i < board.length ; i++) {
-            for(var j = 0 ; j < board.length ; j++) {
-                var cell = table.rows[i].cells[j];
-                console.log("row : " + i + "col : " + j + "content : " + cell);
+        var boardSize = 5 ; // TODO : change board size to be dynamic
+        var myBoard = data[2];
+        var rivalBoard = data[3];
+        var myUIBoard = $(".myBoard")[0];
+        var rivalUIBoard = $(".rivalBoard")[0];
+        var isMyTurn = data[1];
+        for(var i = 0 ; i < boardSize ; i++) {
+            for(var j = 0 ; j < boardSize ; j++) {
+                var myCell = (myUIBoard.rows[i].cells[j]).childNodes[0];
+                var jCell = $(myCell);
+                jCell.val(myBoard[i][j]);
+                var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
+                var jRivalCell = $(rivalCell);
+                jRivalCell.val(rivalBoard[i][j]);
             }
         }
+
+
+        if(isMyTurn) {
+            console.log("its your turn");
+        } else {
+            console.log("its NOT your turn");
+        }
+
 
     }
 
@@ -60,7 +90,11 @@
         var boardSize = ${requestScope.get("boardSize")};
         console.log("boardsize = "+ boardSize);
         var table = document.createElement('TABLE');
-        table.classList.add("myBoard");
+        if(isMyBoard) {
+            table.classList.add("myBoard");
+        } else {
+            table.classList.add("rivalBoard");
+        }
         table.border='1';
         table.width = '100%';
         table.height = '100%';
@@ -79,9 +113,11 @@
                 td.height='60';
                 var cellBtn = document.createElement('input');
                 cellBtn.type = "button" ;
+                cellBtn.textAlign = "center" ;
                 cellBtn.style.height= '100%';
                 cellBtn.style.width= '100%';
-                if(isMyBoard) {
+
+                if(!isMyBoard) {
                     cellBtn.addEventListener('click', getData, false);
 
                 }

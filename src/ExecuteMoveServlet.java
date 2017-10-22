@@ -25,9 +25,9 @@ public class ExecuteMoveServlet extends HttpServlet {
         }
         // get row and column
         String rowS = (String) req.getParameter("row") ;
-        int row = Integer.parseInt(rowS);
+
         String columnS = (String) req.getParameter("col") ;
-        int column = Integer.parseInt(columnS);
+
 
         // Handle Session
         HttpSession session = req.getSession(false);
@@ -39,12 +39,19 @@ public class ExecuteMoveServlet extends HttpServlet {
         //get gameManager
         String gameName = (String) session.getAttribute("gameName");
         GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
-
-        int player =  (int) session.getAttribute("playerNumber");
+        int player = (int) session.getAttribute("playerNumber");
         player--;
 
-        //execute logic move
-        gameManager.executeMove(row,column);
+        if(rowS == null ||
+                columnS == null) {
+
+
+        } else {
+            int column = Integer.parseInt(columnS);
+            int row = Integer.parseInt(rowS);
+            //execute logic move
+            gameManager.executeMove(row, column);
+        }
 
         //get ready board
         char [][] playerBoard = gameManager.getBoardByPlayerNumber(player);
@@ -65,7 +72,7 @@ public class ExecuteMoveServlet extends HttpServlet {
         array4Response.add(isMyTurn);
         array4Response.add(playerBoard);
         array4Response.add(rivalBoard);
-
+        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         Gson gson = new GsonBuilder().create();
         gson.toJson(array4Response , writer);
