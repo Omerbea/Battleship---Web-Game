@@ -152,11 +152,11 @@
                     console.log("gIsMyTurn= " + gIsMyTurn);
                 }
 
-            }, 20000);
+            });
         }
-    });
+    },2000);
     console.log("call to pullingIsMyTurn 1");
-//    pullingIsMyTurn();
+    //pullingIsMyTurn();
 }
 </script>
 </html>
