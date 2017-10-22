@@ -39,10 +39,9 @@ public class lobbyServlet extends HttpServlet {
                 resp.setContentType("application/json");
                 PrintWriter writer = resp.getWriter();
                 // start building json
-                Gson gson = new GsonBuilder().create();
                 String errMsg = e.getMessage();
-                gson.toJson(errMsg,writer);
                 req.setAttribute("errMsg", errMsg);
+                System.out.println("ErrorMsg:"+ errMsg);
                 req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req, resp);
                 return;
             }

@@ -28,8 +28,9 @@
              //var errMsg = <%= (String)request.getAttribute("errMsg") %>;
              //console.log("here");
              //console.log(errMsg);
-             //var errMsg = ${requestScope.get("errMsg")};
-             //console.log(errMsg);
+             var errMsg = ${requestScope.get("errMsg")};
+             request
+             console.log(errMsg);
 
          }
          getErrMsg();
