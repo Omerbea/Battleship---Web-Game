@@ -18,20 +18,11 @@
                 <label> password: </label>
                 <input  name="password" type=password />
                 <input type="submit" />
+                <% if((String)request.getAttribute("errMsg") != null) { %>
+                    <label><%=(String)request.getAttribute("errMsg")%></label>
+                <%}%>
             </form>
         </div>
     </div>
     </body>
-    <script  type="text/javascript">
-         function getErrMsg() {
-             console.log("in getErrMsg");
-             //var errMsg = <%= (String)request.getAttribute("errMsg") %>;
-             //console.log("here");
-             //console.log(errMsg);
-             //var errMsg = ${requestScope.get("errMsg")};
-             //console.log(errMsg);
-
-         }
-         getErrMsg();
-    </script>
 </html>
