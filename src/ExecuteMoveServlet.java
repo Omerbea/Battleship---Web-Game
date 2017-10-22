@@ -43,7 +43,7 @@ public class ExecuteMoveServlet extends HttpServlet {
         player--;
 
         if(rowS == null ||
-                columnS == null) {
+           columnS == null) {
 
 
         } else {
