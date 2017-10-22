@@ -7,7 +7,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">Game Room Player1 <button class="logout-btn">logout</button></div>
+    <div class="header">Game Room Player1     <form method="post" action="/quitGame" enctype="multipart/form-data">
+        <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
     <div class="statSection">

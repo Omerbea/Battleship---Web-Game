@@ -76,7 +76,7 @@
                         "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
                         "<td>"+element.boardSize+"</td>" +
                         "<td>"+element.typeGame+"</td>" +
-                        "<td>"+element.isHaveRegisterPlayer+"</td>");
+                        "<td>"+element.isActiveGame+"</td>");
                 });
             }
         });
@@ -135,7 +135,7 @@
                             "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
                             "<td>"+element.boardSize+"</td>" +
                             "<td>"+element.typeGame+"</td>" +
-                            "<td>"+element.isHaveRegisterPlayer+"</td>");
+                            "<td>"+element.isActiveGame+"</td>");
                     });
                 }
             });
