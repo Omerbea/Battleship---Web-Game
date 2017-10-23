@@ -70,7 +70,7 @@
                 jRivalCell.attr("disabled", isBoardActive);
             }
         }
-        logoutBtn.setAttribute("disabled" , isBoardActive);
+        logoutBtn.disabled = isBoardActive;
     }
 
     function updateUiData(data) {
