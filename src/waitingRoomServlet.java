@@ -22,6 +22,7 @@ public class waitingRoomServlet extends HttpServlet {
         if (session == null){
             //TODO: handle witth error . go to log-in page
         }
+        System.out.println(session.getAttribute("playerNumber") + " - in watting room");
         session.setAttribute("gameName", gameName);
         if(session.getAttribute("playerNumber") == null){
             System.out.println(playerNumber);
