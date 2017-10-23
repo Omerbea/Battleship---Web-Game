@@ -105,6 +105,7 @@
                 else {
                     console.log ("error load..")
                     $('.errorBoxLoadFile').append("<label>" + result + "</label>");
+
                 }
             }
         });

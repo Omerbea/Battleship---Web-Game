@@ -32,7 +32,7 @@
                     $.each(result,function(index , element) {
                         if(element.name == "${gameName}") {
                             if(element.playersEnteredGame >= 2) {
-                                window.location.href = window.location.pathname + "?gameName="+element.name;
+                                window.location.href = window.location.pathname + "?gameName="+element.name + "&boardSize=" + element.boardSize;
                                 clearInterval(id);
                                 return;
                             }
