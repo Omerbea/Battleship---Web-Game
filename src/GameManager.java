@@ -49,7 +49,9 @@ public class GameManager {
     public SimpleStringProperty propWhoPlayProperty() {
         return propWhoPlay;
     }
-
+    public boolean getIsGameOver (){
+        return  this.isGameOver;
+    }
     private Validator validator ;
     private UserInterface userInterface = new UserInterface();
     public GameManager(){
