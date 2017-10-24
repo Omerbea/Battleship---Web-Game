@@ -33,6 +33,7 @@
 <script type="text/javascript">
 
     $(function(){
+        console.log("callTofinalStatistics");
         $.ajax({
             type: "GET" ,
             url : "/finalStatistics",

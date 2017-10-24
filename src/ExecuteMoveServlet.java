@@ -81,7 +81,7 @@ public class ExecuteMoveServlet extends HttpServlet {
                 resExecuteMove="rivalWin";
                 System.out.println("rivalWin");
             }
-            session.removeAttribute("gameName");
+            //session.removeAttribute("gameName");
         }
         //get ready board
         char [][] playerBoard = gameManager.getBoardByPlayerNumber(player);

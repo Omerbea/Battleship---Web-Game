@@ -29,6 +29,10 @@ public class waitingRoomServlet extends HttpServlet {
         }
         session.setAttribute("gameName", gameName);
         if(session.getAttribute("playerNumber") == null){
+            if (currentDetails.amountOfPlayersInGame() <= 1){
+                req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+                return;
+            }
             System.out.println(playerNumber);
             session.setAttribute("playerNumber" , playerNumber++);
 
@@ -46,7 +50,6 @@ public class waitingRoomServlet extends HttpServlet {
                 System.out.println("warring!!");
             }
         } else {
-            lobbyManager.setGameIsActive(gameName);
             int boardSize = currentManager.getBoardSize();
             req.setAttribute("boardSize", boardSize);
             System.out.println("Player" + session.getAttribute("playerNumber") + " is in game");
@@ -55,6 +58,7 @@ public class waitingRoomServlet extends HttpServlet {
 
                 resp.sendRedirect(req.getContextPath() +"/jsp/gameRoomPlayerOne.jsp?boardSize=" + boardSize);
             } else {
+                lobbyManager.setGameIsActive(gameName);
                 System.out.println("getRequestDispatcher player 2");
                 resp.sendRedirect(req.getContextPath()+ "/jsp/gameRoomPlayerTwo.jsp?boardSize=" +boardSize);
 
