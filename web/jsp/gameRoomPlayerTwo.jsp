@@ -106,7 +106,7 @@
         console.log("current score:" + statistics.score);
         //avargeTimeTurn
 
-
+        console.log(data);
         var statusLabelText = $('.statusLabel')[0];
         if(data[4] === "non") {
             statusLabelText.textContent = "You Miss! Try again next turn.";
@@ -207,6 +207,16 @@
                 setBoardActive(false);
                 console.log("my turn ");
                 clearInterval(idPullingIsNotMyTurn);
+                $.ajax({
+                    type: "GET",
+                    url: "/ExecuteMove",
+                    success: function (result) {
+                        gIsMyTurn = result[1]
+                        console.log("gIsMyTurn= " + gIsMyTurn);
+                        updateUiData(result);
+                    }
+
+                });
             } else {
                 console.log("not my turn");
                 setBoardActive(true);
@@ -215,12 +225,8 @@
                     url: "/ExecuteMove",
                     success: function (result) {
                         gIsMyTurn = result[1]
-                        if(result[4] == "rivalQuit") {
-                            console.log("rival quit");
-                            window.location.href = "http://localhost:8081/lobby";
-                            console.log("after redirect quit");
-                        }
                         console.log("gIsMyTurn= " + gIsMyTurn);
+                        updateUiData(result);
                     }
 
                 });
