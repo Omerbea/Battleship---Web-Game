@@ -29,8 +29,8 @@ public class waitingRoomServlet extends HttpServlet {
         }
         session.setAttribute("gameName", gameName);
         if(session.getAttribute("playerNumber") == null){
-            if (currentDetails.amountOfPlayersInGame() <= 1){
-                req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+            if (currentDetails.amountOfPlayersInGame() > 1){
+                req.getRequestDispatcher("/jsp/lobby.jsp").forward(req , resp);
                 return;
             }
             System.out.println(playerNumber);
