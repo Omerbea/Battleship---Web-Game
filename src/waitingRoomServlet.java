@@ -43,6 +43,7 @@ public class waitingRoomServlet extends HttpServlet {
                 System.out.println("warring!!");
             }
         } else {
+            lobbyManager.setGameIsActive(gameName);
             int boardSize = currentManager.getBoardSize();
             req.setAttribute("boardSize", boardSize);
             System.out.println("Player" + session.getAttribute("playerNumber") + " is in game");

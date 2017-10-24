@@ -20,6 +20,10 @@ public class GameLobbyDetailes {
         isActiveGame = "yes";
     }
 
+    public void setanctiveGame (){
+        isActiveGame="false";
+    }
+
     public void addPlayerEntered() {
         playersEnteredGame++;
     }

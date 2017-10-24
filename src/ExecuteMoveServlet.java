@@ -63,16 +63,28 @@ public class ExecuteMoveServlet extends HttpServlet {
             //execute logic move
             resExecuteMove = gameManager.executeMove(row, column);
         }
+        System.out.println(resExecuteMove);
+        //check if the player (I) win
+        if (resExecuteMove == "Win"){
+            System.out.println("I Win");
+            resExecuteMove = "I Win";
+
+        }
         //verify the game is still running
-        if (gameManager.getIsGameOver()){
+        else if (gameManager.getIsGameOver()){
             //the game not running
-            System.out.println("Rival quit");
+            if (gameManager.getQuitGame()){
+                System.out.println("Rival quit");
+                resExecuteMove = "rivalQuit";
+            }
+
+
+
             //req.getRequestDispatcher("/WEB-INF/lobby.jsp").include(req , resp);
 //            resp.sendRedirect(req.getContextPath() + "/lobby");
             //resp.sendRedirect(req.getContextPath()+ "/jsp/lobby.jsp" );
             session.removeAttribute("gameName");
-            System.out.println( "I back to lobby");
-            resExecuteMove = "rivalQuit";
+            //System.out.println( "I back to lobby");
             //return;
         }
         //get ready board

@@ -24,6 +24,24 @@ public class LobbyManager {
         }
     }
 
+    public void setGameIsActive (String gameName){
+        if (gameName == null){
+            System.out.println("warring23");
+        }
+        else{
+            games.get(gameName).setActiveGame();
+        }
+    }
+
+    public void serGameAncative (String gameName){
+        if (gameName == null){
+            System.out.println("warring23");
+        }
+        else{
+            games.get(gameName).setActiveGame();
+        }
+    }
+
     public GameLobbyDetailes getGameLobbyDetailsByName(String name) {
         return games.get(name);
     }

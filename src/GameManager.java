@@ -45,12 +45,21 @@ public class GameManager {
     private long startTime =0;
     private  ArrayList <Replay> replayTurns  = new ArrayList<>();
     private int replayIndex = 0;
+    private boolean quitGame = false;
     private String gameType ;
     public SimpleStringProperty propWhoPlayProperty() {
         return propWhoPlay;
     }
     public boolean getIsGameOver (){
         return  this.isGameOver;
+    }
+
+    public void setQuitGame(boolean quitGame) {
+        this.quitGame = quitGame;
+    }
+
+    public boolean getQuitGame (){
+        return  this.quitGame;
     }
     private Validator validator ;
     private UserInterface userInterface = new UserInterface();
