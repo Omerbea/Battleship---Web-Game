@@ -39,15 +39,22 @@ public class waitingRoomServlet extends HttpServlet {
             if(isFirstTime) {
                 req.getRequestDispatcher("/WEB-INF/waitingRoom.jsp").include(req, resp);
             }
+            else{
+                System.out.println("warring!!");
+            }
         } else {
             int boardSize = currentManager.getBoardSize();
             req.setAttribute("boardSize", boardSize);
             System.out.println("Player" + session.getAttribute("playerNumber") + " is in game");
 
             if((int)session.getAttribute("playerNumber") == 1) {
-                req.getRequestDispatcher("/WEB-INF/gameRoomPlayerOne.jsp").include(req, resp);
+                System.out.println("getRequestDispatcher player 1");
+
+                resp.sendRedirect(req.getContextPath() +"/jsp/gameRoomPlayerOne.jsp?boardSize=" + boardSize);
             } else {
-                req.getRequestDispatcher("/WEB-INF/gameRoomPlayerTwo.jsp").include(req, resp);
+                System.out.println("getRequestDispatcher player 2");
+                resp.sendRedirect(req.getContextPath()+ "/jsp/gameRoomPlayerTwo.jsp?boardSize=" +boardSize);
+
             }
         }
 /*

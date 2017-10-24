@@ -27,12 +27,11 @@
                 url: "/activeGamesData",
                 success: function (result) {
                     console.log(result);
-
                     console.log(result);
                     $.each(result,function(index , element) {
                         if(element.name == "${gameName}") {
                             if(element.playersEnteredGame >= 2) {
-                                window.location.href = window.location.pathname + "?gameName="+element.name + "&boardSize=" + element.boardSize;
+                                window.location.href = window.location.pathname + "?gameName="+element.name ;
                                 clearInterval(id);
                                 return;
                             }

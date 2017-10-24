@@ -30,7 +30,7 @@ public class lobbyServlet extends HttpServlet {
 
         String status = (String) session.getAttribute("isFirstTime");
         if (status != null && status =="no"){
-
+            System.out.println("is not my first time in lobby servlet");
         }
         else{
             try {
@@ -49,7 +49,7 @@ public class lobbyServlet extends HttpServlet {
             }
             session.setAttribute("isFirstTime", "no");
         }
-
+        System.out.println("send lobby.jsp");
         req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
     }
 
