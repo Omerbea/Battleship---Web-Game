@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -5,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 @WebServlet(name = "finalStatisticsServlet" , urlPatterns = {"/finalStatistics"})
 public class FinalStatisticsServlet extends HttpServlet {
@@ -28,7 +33,15 @@ public class FinalStatisticsServlet extends HttpServlet {
         GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
         Statistics statisticsPlayer1 = gameManager.getGameStatisticByPlayer(0);
         Statistics statisticsPlayer2 = gameManager.getGameStatisticByPlayer(1);
-        req.getRequestDispatcher("/jsp/finishGameStatistics.jsp");
+
+        //create response
+        ArrayList<Object> array4Response = new ArrayList<Object>();
+        array4Response.add(statisticsPlayer1);
+        array4Response.add(statisticsPlayer2);
+        resp.setContentType("application/json");
+        PrintWriter writer = resp.getWriter();
+        Gson gson = new GsonBuilder().create();
+        gson.toJson(array4Response , writer);
 
         //do finish work
         session.removeAttribute("gameName");
