@@ -47,7 +47,6 @@ public class waitingRoomServlet extends HttpServlet {
             int boardSize = currentManager.getBoardSize();
             req.setAttribute("boardSize", boardSize);
             System.out.println("Player" + session.getAttribute("playerNumber") + " is in game");
-
             if((int)session.getAttribute("playerNumber") == 1) {
                 System.out.println("getRequestDispatcher player 1");
 
