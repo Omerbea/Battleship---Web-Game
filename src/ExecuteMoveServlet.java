@@ -79,6 +79,7 @@ public class ExecuteMoveServlet extends HttpServlet {
             }
             else{
                 resExecuteMove="rivalWin";
+                System.out.println("rivalWin");
             }
             session.removeAttribute("gameName");
         }

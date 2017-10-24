@@ -28,7 +28,7 @@ public class FinalStatisticsServlet extends HttpServlet {
         GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
         Statistics statisticsPlayer1 = gameManager.getGameStatisticByPlayer(0);
         Statistics statisticsPlayer2 = gameManager.getGameStatisticByPlayer(1);
-        resp.sendRedirect(req.getContextPath() + "/lobby");
+        req.getRequestDispatcher("/jsp/finishGameStatistics.jsp");
 
         //do finish work
         session.removeAttribute("gameName");
