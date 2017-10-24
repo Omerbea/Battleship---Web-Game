@@ -105,6 +105,13 @@
         console.log("current score:" + statistics.score);
         //avargeTimeTurn
 
+        var statusLabelText = $('.statusLabel')[0];
+        if(data[4] === "non") {
+            statusLabelText.textContent = "You Miss! Try again next turn.";
+        } else if (data[4] === "hit") {
+            statusLabelText.textContent = "You Hit! You have another turn.";
+        }
+
         $(".score").html(statistics.score);
         $(".time").html(statistics.avargeTimeTurn);
         //$(".turns").html(statistics.avargeTimeTurn);
@@ -112,13 +119,10 @@
         if(isMyTurn) {
             console.log("its your turn");
             setBoardActive(false);
-            var statusLabelText = $('.statusLabel')[0];
-            statusLabelText.textContent = "its Your turn";
+
         } else {
             console.log("its NOT your turn");
             setBoardActive(true);
-            var statusLabelText = $('.statusLabel')[0];
-            statusLabelText.textContent = "its NOT Your turn";
 
             pullingIsMyTurn();
         }
@@ -181,8 +185,6 @@
                 // its your turn
                 setBoardActive(false);
                 console.log("my turn ");
-                var statusLabelText = $('.statusLabel')[0];
-                statusLabelText.textContent = "its Your turn";
                 clearInterval(idPullingIsNotMyTurn);
             } else {
                 console.log("not my turn");
