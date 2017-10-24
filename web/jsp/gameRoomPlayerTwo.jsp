@@ -117,21 +117,22 @@
                 console.log("in settimeout");
                 statusLabelText.textContent = "You Win! Good job!";
             } , 2000);
-            window.location.href = "http://localhost:8081/finalStatistics";
+            window.location.href = "http://localhost:8081/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalWin") {
             setTimeout(function() {
 
                 statusLabelText.textContent = "You Lose! See you next game.";
             } , 2000);
-            window.location.href = "http://localhost:8081/finalStatistics";
+            window.location.href = "http://localhost:8081/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalQuit") {
             setTimeout(function() {
                 console.log("in settimeout");
                 statusLabelText.textContent = "You Win! Good job!";
             } , 2000);
-            window.location.href = "http://localhost:8081/finalStatistics";
+            window.location.href = "http://localhost:8081/jsp/finishGameStatistics.jsp";
 
         }
+
 
         $(".score").html(statistics.score);
         $(".time").html(statistics.avargeTimeTurn);
