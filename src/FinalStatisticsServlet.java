@@ -9,7 +9,8 @@ import java.io.IOException;
 @WebServlet(name = "finalStatisticsServlet" , urlPatterns = {"/finalStatistics"})
 public class FinalStatisticsServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //lobby manager handle
         LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
         if (lobbyManager == null){
             System.out.println("Error lobby manager is null");
@@ -22,12 +23,16 @@ public class FinalStatisticsServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
             return;
         }
-
+        //get statistics
         String gameName = (String) session.getAttribute("gameName");
         GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
         Statistics statisticsPlayer1 = gameManager.getGameStatisticByPlayer(0);
         Statistics statisticsPlayer2 = gameManager.getGameStatisticByPlayer(1);
         resp.sendRedirect(req.getContextPath() + "/lobby");
+
+        //do finish work
+        session.removeAttribute("gameName");
+
 
     }
 }

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">Game Room Player2   <form method="post" action="/finalStatistics" enctype="multipart/form-data">
+    <div class="header">Game Room Player2   <form method="get" action="/finalStatistics" enctype="multipart/form-data">
         <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
