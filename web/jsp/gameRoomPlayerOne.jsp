@@ -19,7 +19,6 @@
     <div class="toolSection">Tools section</div>
 </div>
 </body>
-
 <script type="text/javascript">
 
     var idPullingIsNotMyTurn =0;
@@ -76,7 +75,9 @@
 
     function updateUiData(data) {
         //updating boards
-        var boardSize = 5 ; // TODO : change board size to be dynamic
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var boardSize = url.searchParams.get("boardSize");
         var myBoard = data[2];
         var rivalBoard = data[3];
         var statistics = data[0];
@@ -128,7 +129,9 @@
     function createTablesForElement(element , isMyBoard) {
 
         var myTableDiv = element;
-        var boardSize = ${requestScope.get("boardSize")};
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var boardSize = url.searchParams.get("boardSize");
         console.log("boardsize = "+ boardSize);
         var table = document.createElement('TABLE');
         if(isMyBoard) {
