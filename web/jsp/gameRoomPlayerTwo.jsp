@@ -114,16 +114,23 @@
             statusLabelText.textContent = "You Hit! You have another turn.";
         } else if(data[4] === "Win") {
             setTimeout(function() {
-
+                console.log("in settimeout");
                 statusLabelText.textContent = "You Win! Good job!";
             } , 2000);
-            window.location.href = "http://localhost:8081/jsp/finishGameStatistics.jsp";
+            window.location.href = "http://localhost:8081/finalStatistics";
         } else if(data[4] === "rivalWin") {
             setTimeout(function() {
 
                 statusLabelText.textContent = "You Lose! See you next game.";
             } , 2000);
-            window.location.href = "http://localhost:8081/jsp/finishGameStatistics.jsp";
+            window.location.href = "http://localhost:8081/finalStatistics";
+        } else if(data[4] === "rivalQuit") {
+            setTimeout(function() {
+                console.log("in settimeout");
+                statusLabelText.textContent = "You Win! Good job!";
+            } , 2000);
+            window.location.href = "http://localhost:8081/finalStatistics";
+
         }
 
         $(".score").html(statistics.score);
