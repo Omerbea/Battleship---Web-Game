@@ -44,7 +44,9 @@ public class ExecuteMoveServlet extends HttpServlet {
             System.out.println("Warnnig: need to handle this issue better");
             System.out.println("we delete gameName from session already.. ");
             //req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
-            resp.sendRedirect(req.getContextPath() + "/lobby");
+//            resp.sendRedirect(req.getContextPath() + "/lobby");
+            resp.sendRedirect(req.getContextPath()+ "/jsp/lobby.jsp" );
+
             return;
         }
         GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
@@ -66,7 +68,8 @@ public class ExecuteMoveServlet extends HttpServlet {
             //the game not running
             System.out.println("Rival quit");
             //req.getRequestDispatcher("/WEB-INF/lobby.jsp").include(req , resp);
-            resp.sendRedirect(req.getContextPath() + "/lobby");
+//            resp.sendRedirect(req.getContextPath() + "/lobby");
+            resp.sendRedirect(req.getContextPath()+ "/jsp/lobby.jsp" );
             session.removeAttribute("gameName");
             System.out.println( "I back to lobby");
             return;
