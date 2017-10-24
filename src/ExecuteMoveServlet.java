@@ -18,6 +18,7 @@ public class ExecuteMoveServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //get lobby manager
+        String resExecuteMove ="";
         System.out.println("executeMoveServlet"  );
         LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
         if (lobbyManager == null){
@@ -51,13 +52,13 @@ public class ExecuteMoveServlet extends HttpServlet {
 
         if(rowS == null ||
            columnS == null) {
-
+            System.out.println("rowS or columnS == null");
 
         } else {
             int column = Integer.parseInt(columnS);
             int row = Integer.parseInt(rowS);
             //execute logic move
-            gameManager.executeMove(row, column);
+            resExecuteMove = gameManager.executeMove(row, column);
         }
         //verify the game is still running
         if (gameManager.getIsGameOver()){
@@ -87,6 +88,7 @@ public class ExecuteMoveServlet extends HttpServlet {
         array4Response.add(isMyTurn);
         array4Response.add(playerBoard);
         array4Response.add(rivalBoard);
+        array4Response.add(resExecuteMove);
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         Gson gson = new GsonBuilder().create();

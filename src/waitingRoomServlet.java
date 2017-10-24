@@ -22,12 +22,13 @@ public class waitingRoomServlet extends HttpServlet {
         if (session == null){
             //TODO: handle witth error . go to log-in page
         }
-        System.out.println(session.getAttribute("playerNumber") + " - in watting room");
         session.setAttribute("gameName", gameName);
         if(session.getAttribute("playerNumber") == null){
             System.out.println(playerNumber);
             session.setAttribute("playerNumber" , playerNumber++);
         }
+        System.out.println(session.getAttribute("playerNumber") + " - in watting room");
+
         currentDetails.addPlayerEntered();
         if(currentDetails.amountOfPlayersInGame() <= 1) {
             req.getRequestDispatcher("/WEB-INF/waitingRoom.jsp").include(req, resp);

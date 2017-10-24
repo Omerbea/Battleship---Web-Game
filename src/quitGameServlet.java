@@ -15,6 +15,7 @@ public class quitGameServlet extends HttpServlet {
         //Handle Session
         HttpSession session = req.getSession(false);
         if (session== null){
+            System.out.println("Warning..");
             //TODO ridirect to log in
         }
 
@@ -25,7 +26,9 @@ public class quitGameServlet extends HttpServlet {
 
         gameManager.finishTheGame();
         session.removeAttribute("gameName");
-        req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
+        resp.sendRedirect(req.getContextPath() + "/lobby");
+        //req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
+        return;
 
     }
 }

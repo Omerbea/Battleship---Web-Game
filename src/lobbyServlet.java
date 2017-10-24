@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 public class lobbyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("someone in lobbyServlet doGet");
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         HttpSession session = req.getSession(false);
         if (session == null){
