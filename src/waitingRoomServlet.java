@@ -12,7 +12,7 @@ public class waitingRoomServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        System.out.println("wattingRoom" + playerNumber);
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         GameLobbyDetailes currentDetails = lobbyManager.getGameLobbyDetailsByName((String)req.getParameter("gameName"));
         String gameName = (String)req.getParameter("gameName");

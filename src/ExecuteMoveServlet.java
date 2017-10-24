@@ -43,7 +43,8 @@ public class ExecuteMoveServlet extends HttpServlet {
         if (gameName == null){
             System.out.println("Warnnig: need to handle this issue better");
             System.out.println("we delete gameName from session already.. ");
-            req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
+            //req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
+            resp.sendRedirect(req.getContextPath() + "/lobby");
             return;
         }
         GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
