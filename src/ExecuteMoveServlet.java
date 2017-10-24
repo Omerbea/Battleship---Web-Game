@@ -64,7 +64,8 @@ public class ExecuteMoveServlet extends HttpServlet {
         if (gameManager.getIsGameOver()){
             //the game not running
             System.out.println("Rival quit");
-            req.getRequestDispatcher("/WEB-INF/lobby.jsp").forward(req , resp);
+            //req.getRequestDispatcher("/WEB-INF/lobby.jsp").include(req , resp);
+            resp.sendRedirect(req.getContextPath() + "/lobby");
             session.removeAttribute("gameName");
             System.out.println( "I back to lobby");
             return;

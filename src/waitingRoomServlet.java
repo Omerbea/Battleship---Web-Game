@@ -12,6 +12,7 @@ public class waitingRoomServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        boolean isFirstTime = false ;
 
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         GameLobbyDetailes currentDetails = lobbyManager.getGameLobbyDetailsByName((String)req.getParameter("gameName"));
@@ -26,15 +27,21 @@ public class waitingRoomServlet extends HttpServlet {
         if(session.getAttribute("playerNumber") == null){
             System.out.println(playerNumber);
             session.setAttribute("playerNumber" , playerNumber++);
+            int boardSize = currentManager.getBoardSize();
+            req.setAttribute("boardSize", boardSize);
+            currentDetails.addPlayerEntered();
+            isFirstTime = true ;
+
         }
         System.out.println(session.getAttribute("playerNumber") + " - in watting room");
 
-        currentDetails.addPlayerEntered();
         if(currentDetails.amountOfPlayersInGame() <= 1) {
-            req.getRequestDispatcher("/WEB-INF/waitingRoom.jsp").include(req, resp);
+            if(isFirstTime) {
+                req.getRequestDispatcher("/WEB-INF/waitingRoom.jsp").include(req, resp);
+            }
         } else {
-            int boardSize = currentManager.getBoardSize();
-            req.setAttribute("boardSize", boardSize);
+            System.out.println("Player" + session.getAttribute("playerNumber") + " is in game");
+
             if((int)session.getAttribute("playerNumber") == 1) {
                 req.getRequestDispatcher("/WEB-INF/gameRoomPlayerOne.jsp").include(req, resp);
             } else {
