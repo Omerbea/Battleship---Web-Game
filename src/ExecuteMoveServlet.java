@@ -69,10 +69,11 @@ public class ExecuteMoveServlet extends HttpServlet {
             System.out.println("Rival quit");
             //req.getRequestDispatcher("/WEB-INF/lobby.jsp").include(req , resp);
 //            resp.sendRedirect(req.getContextPath() + "/lobby");
-            resp.sendRedirect(req.getContextPath()+ "/jsp/lobby.jsp" );
+            //resp.sendRedirect(req.getContextPath()+ "/jsp/lobby.jsp" );
             session.removeAttribute("gameName");
             System.out.println( "I back to lobby");
-            return;
+            resExecuteMove = "rivalQuit";
+            //return;
         }
         //get ready board
         char [][] playerBoard = gameManager.getBoardByPlayerNumber(player);
