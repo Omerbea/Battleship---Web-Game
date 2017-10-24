@@ -67,7 +67,7 @@ public class ExecuteMoveServlet extends HttpServlet {
         //check if the player (I) win
         if (resExecuteMove == "Win"){
             System.out.println("I Win");
-            resExecuteMove = "I Win";
+            resExecuteMove = "Win";
 
         }
         //verify the game is still running
@@ -77,15 +77,10 @@ public class ExecuteMoveServlet extends HttpServlet {
                 System.out.println("Rival quit");
                 resExecuteMove = "rivalQuit";
             }
-
-
-
-            //req.getRequestDispatcher("/WEB-INF/lobby.jsp").include(req , resp);
-//            resp.sendRedirect(req.getContextPath() + "/lobby");
-            //resp.sendRedirect(req.getContextPath()+ "/jsp/lobby.jsp" );
+            else{
+                resExecuteMove="rivalWin"; 
+            }
             session.removeAttribute("gameName");
-            //System.out.println( "I back to lobby");
-            //return;
         }
         //get ready board
         char [][] playerBoard = gameManager.getBoardByPlayerNumber(player);
