@@ -104,7 +104,7 @@
         }
         console.log("current score:" + statistics.score);
         //avargeTimeTurn
-
+        console.log(data);
         var statusLabelText = $('.statusLabel')[0];
         if(data[4] === "non") {
             statusLabelText.textContent = "You Miss! Try again next turn.";
