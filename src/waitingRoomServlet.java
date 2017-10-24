@@ -28,8 +28,7 @@ public class waitingRoomServlet extends HttpServlet {
         if(session.getAttribute("playerNumber") == null){
             System.out.println(playerNumber);
             session.setAttribute("playerNumber" , playerNumber++);
-            int boardSize = currentManager.getBoardSize();
-            req.setAttribute("boardSize", boardSize);
+
             currentDetails.addPlayerEntered();
             isFirstTime = true ;
 
@@ -41,6 +40,8 @@ public class waitingRoomServlet extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/waitingRoom.jsp").include(req, resp);
             }
         } else {
+            int boardSize = currentManager.getBoardSize();
+            req.setAttribute("boardSize", boardSize);
             System.out.println("Player" + session.getAttribute("playerNumber") + " is in game");
 
             if((int)session.getAttribute("playerNumber") == 1) {
