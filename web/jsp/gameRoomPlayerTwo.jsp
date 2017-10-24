@@ -106,11 +106,24 @@
         console.log("current score:" + statistics.score);
         //avargeTimeTurn
 
+
         var statusLabelText = $('.statusLabel')[0];
         if(data[4] === "non") {
             statusLabelText.textContent = "You Miss! Try again next turn.";
         } else if (data[4] === "hit") {
             statusLabelText.textContent = "You Hit! You have another turn.";
+        } else if(data[4] === "Win") {
+            setTimeout(function() {
+
+                statusLabelText.textContent = "You Win! Good job!";
+            } , 2000);
+            window.location.href = "http://localhost:8081/jsp/finishGameStatistics.jsp";
+        } else if(data[4] === "rivalWin") {
+            setTimeout(function() {
+
+                statusLabelText.textContent = "You Lose! See you next game.";
+            } , 2000);
+            window.location.href = "http://localhost:8081/jsp/finishGameStatistics.jsp";
         }
 
         $(".score").html(statistics.score);

@@ -110,6 +110,10 @@
             statusLabelText.textContent = "You Miss! Try again next turn.";
         } else if (data[4] === "hit") {
             statusLabelText.textContent = "You Hit! You have another turn.";
+        } else if(data[4] === "Win") {
+            statusLabelText.textContent = "You Win! Good job!";
+        } else if(data[4] === "rivalWin") {
+            statusLabelText.textContent = "You Lose! See you next game.";
         }
 
         $(".score").html(statistics.score);
