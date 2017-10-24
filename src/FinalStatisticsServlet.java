@@ -44,7 +44,7 @@ public class FinalStatisticsServlet extends HttpServlet {
         gson.toJson(array4Response , writer);
 
         //do finish work
-        session.removeAttribute("gameName");
+        //session.removeAttribute("gameName");
 
 
     }
