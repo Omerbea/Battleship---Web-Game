@@ -106,6 +106,7 @@ public class ExecuteMoveServlet extends HttpServlet {
         array4Response.add(playerBoard);
         array4Response.add(rivalBoard);
         array4Response.add(resExecuteMove);
+        array4Response.add(session.getAttribute("userName"));
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         Gson gson = new GsonBuilder().create();
