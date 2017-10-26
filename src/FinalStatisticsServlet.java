@@ -44,8 +44,33 @@ public class FinalStatisticsServlet extends HttpServlet {
         gson.toJson(array4Response , writer);
 
         //do finish work
-        //session.removeAttribute("gameName");
+        session.removeAttribute("gameName");
+        session.removeAttribute("playerNumber");
 
+        String statusIsITheFirst2BackLobby = (String) getServletContext().getAttribute("finish"+gameName);
+        if (statusIsITheFirst2BackLobby == null){
+            //I the First
+            getServletContext().setAttribute("finish"+gameName, "yes");
+        }
+        else{
+            //I the second I can Delete gameManager
+            getServletContext().removeAttribute("finish"+gameName);
+            String userName=(String) session.getAttribute("userName");
+            restartGameManager(gameName,gameManager, lobbyManager, userName);
 
+        }
+
+    }
+
+    public void restartGameManager (String gameName , GameManager gameManager, LobbyManager lobbyManager , String userName){
+        String fileName = gameManager.getFileName();
+        lobbyManager.removePlayerFromList(gameName);
+
+        try {
+            lobbyManager.setNewGame(fileName, gameName, userName);
+        }
+        catch (Exception e){
+            System.out.println("Error! exeption: " + e.getMessage());
+        }
     }
 }

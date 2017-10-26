@@ -74,6 +74,11 @@ public class LobbyManager {
 
     }
 
+    public boolean removeGameManager (String gameName){
+        this.games.remove(gameName);
+        return true;
+    }
+
 
 
     public boolean isPlayerExist(String name) {

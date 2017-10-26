@@ -31,7 +31,7 @@ public class GameManager {
             howManyTurn += 1;
         }
     }
-
+    private String fileName;
     private  GameStatistic gameStatistic ;
     private ArrayList<String> mainMenu = new ArrayList<>();
     private  boolean isGameRun = false;
@@ -182,6 +182,7 @@ public class GameManager {
 */
 
     public Boolean loadFile(String fileName ) throws Exception {
+            this.fileName = fileName;
             Boolean fileValid = false;
             if (this.isGameRun){
                  return false;
@@ -190,6 +191,10 @@ public class GameManager {
                 fileValid =  true;
             }
             return fileValid;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 
     public boolean restartGame (){
