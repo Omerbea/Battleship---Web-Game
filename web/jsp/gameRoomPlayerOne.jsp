@@ -298,8 +298,8 @@
                 cellBtn.style.width= '100%';
 
                 if(!isMyBoard) {
-                    cellBtn.addEventListener('click', doOnClick, false);
-                    
+                    cellBtn.addEventListener('click', getData, false);
+                    cellBtn.addEventListener('click' , doOnClick, false);
 
                 }
                 td.appendChild(cellBtn);
@@ -313,7 +313,6 @@
 
     function doOnClick (){
         console.log("doonclick")
-        getData();
         console.log("after GetData");
         console.log("after disabled");
     }
