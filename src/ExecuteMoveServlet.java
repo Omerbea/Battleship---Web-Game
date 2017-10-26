@@ -97,6 +97,8 @@ public class ExecuteMoveServlet extends HttpServlet {
             isMyTurn = true;
         }
 
+        System.out.println(statistics.getAvargeTimeTurn());
+
         // prepare response
         ArrayList <Object> array4Response = new ArrayList<Object>();
         array4Response.add(statistics);
