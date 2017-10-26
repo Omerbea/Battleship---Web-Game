@@ -16,10 +16,59 @@
         <br><label>Avg Time : </label><label class="time">0</label><br>
         <br><label>Turn Played : </label><label class="turns">0</label><br>
     </div>
-    <div class="toolSection">Tools section</div>
+    <div class="toolSection">Tools section
+        <br><br>
+    <img class="mine-img" src="/resources/bomb_PNG29.png" draggable="true" width="50" height="50"
+    ondragstart="drag(event)"></img>
+        <br>
+        <label class="tot-mine"></label>
+    </div>
 </div>
 </body>
 <script type="text/javascript">
+    var gNumOfMines = 0;
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drop(ev) {
+        console.log("mine has dropped");
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        console.log("===========")
+        row = $(ev.target)[0].parentNode.parentNode.rowIndex;
+        col = $(ev.target)[0].parentNode.cellIndex;
+        console.log("column dropped " + col);
+        console.log("row dropped " + row);
+
+        $.ajax({
+            type: "GET" ,
+            url : "/ExecuteMine?row="+row + "&col="+col,
+            success : function(result) {
+                console.log(result);
+                if(result === "good") {
+                    $.ajax({
+                        type: "GET" ,
+                        url : "/ExecuteMove",
+                        success : function(result) {
+                            updateUiData(result);
+                        }
+                    });
+                    console.log("Mine was added.");
+                } else if(result === "bad") {
+                    console.log("Problem adding Mine.");
+                }
+            }
+        });
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        console.log("mine has picked up");
+    }
+
+
+
 
     var idPullingIsNotMyTurn =0;
     var gIsMyTurn = 0;
@@ -32,19 +81,29 @@
         board.appendChild(statusLabel);
         statusLabel.style.display = 'inherit';
         statusLabel.style.paddingTop = '20px';
+        pullingIsMyTurn();
     });
 
 
-    $(function() {
+    /*$(function() {
         $.ajax({
             type: "GET" ,
             url : "/ExecuteMove",
-            //url:"/ExecuteMove",
             success : function(result) {
                 updateUiData(result);
             }
         });
-    })
+    })*/
+
+    function getDataNoCoordinates() {
+        $.ajax({
+            type: "GET" ,
+            url : "/ExecuteMove",
+            success : function(result) {
+                updateUiData(result);
+            }
+        });
+    }
 
     function getData() {
         $.ajax({
@@ -84,13 +143,24 @@
         var myUIBoard = $(".myBoard")[0];
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
-        console.log('================================')
         gIsMyTurn = data[1];
+        gNumOfMines = data[0].numofMines;
+
+        if(gNumOfMines == 0) {
+            $('.mine-img').hide();
+            $('.tot-mine').hide();
+        } else {
+            $('.tot-mine')[0].textContent = gNumOfMines;
+        }
+
+
         for(var i = 0 ; i < boardSize ; i++) {
             for(var j = 0 ; j < boardSize ; j++) {
                 var myCell = (myUIBoard.rows[i].cells[j]).childNodes[0];
                 var jCell = $(myCell);
                 jCell.val(myBoard[i][j]);
+                jCell.attr('ondrop' , "drop(event)");
+                jCell.attr('ondragover' , "allowDrop(event)");
                 var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
                 var jRivalCell = $(rivalCell);
                 console.log(rivalBoard[i][j]);
@@ -143,7 +213,7 @@
             console.log("its NOT your turn");
             setBoardActive(true);
 
-            pullingIsMyTurn();
+            //pullingIsMyTurn();
         }
 
 
@@ -204,9 +274,11 @@
                 // its your turn
                 setBoardActive(false);
                 console.log("my turn ");
-                clearInterval(idPullingIsNotMyTurn);
+                getDataNoCoordinates();
+                //clearInterval(idPullingIsNotMyTurn);
             } else {
                 console.log("not my turn");
+                getDataNoCoordinates();
                 setBoardActive(true);
                 $.ajax({
                     type: "GET",
@@ -223,7 +295,7 @@
 
                 });
             }
-        },2000);
+        },3000);
         console.log("call to pullingIsMyTurn 1");
         //pullingIsMyTurn();
     }
