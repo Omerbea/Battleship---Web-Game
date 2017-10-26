@@ -56,7 +56,12 @@ public class waitingRoomServlet extends HttpServlet {
             System.out.println("Player" + session.getAttribute("playerNumber") + " is in game");
             if((int)session.getAttribute("playerNumber") == 1) {
                 System.out.println("getRequestDispatcher player 1");
-
+                try {
+                    currentManager.gameStart();
+                }
+                catch (Exception e){
+                    System.out.println("Expetion: "  + e.getMessage());
+                }
                 resp.sendRedirect(req.getContextPath() +"/jsp/gameRoomPlayerOne.jsp?boardSize=" + boardSize);
             } else {
                 lobbyManager.setGameIsActive(gameName);

@@ -1,20 +1,39 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.corba.se.spi.ior.ObjectKey;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
 
 @WebServlet(name = "lobbyServlet" , urlPatterns = {"/lobby"})
 public class lobbyServlet extends HttpServlet {
+    int countUsersEntered = 0;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (countUsersEntered == 0 ) {
+            //delete older files from the past instance
+            countUsersEntered++;
+            File theDir = new File("gamesXmls");
+            if (theDir.exists()) {
+                Path dirPath = Paths.get("./gamesXmls");
+                Files.walk(dirPath)
+                        .map(Path::toFile)
+                        .sorted(Comparator.comparing(File::isDirectory))
+                        .forEach(File::delete);
+
+
+            }
+        }
         System.out.println("someone in lobbyServlet doGet");
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
         HttpSession session = req.getSession(false);

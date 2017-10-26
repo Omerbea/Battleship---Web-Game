@@ -38,9 +38,28 @@ public class loadGameServlet extends HttpServlet {
         InputStream fileContent = filePart.getInputStream();
         System.out.println(fileContent);
         //TODO: change the path to be relative path
-        String uniqFileName = "SaveFileUploaded" + gameName + ".xml";
-
+        File theDir = new File("gamesXmls");
+        // if the directory does not exist, create it
+        if (!theDir.exists()) {
+            System.out.println("creating directory: " + theDir.getName());
+            boolean result = false;
+            try{
+                theDir.mkdir();
+                result = true;
+            }
+            catch(SecurityException se){
+                //handle it
+                System.out.println("Exception!: " + se.getMessage());
+                return;
+            }
+            if(result) {
+                System.out.println("DIR created");
+            }
+        }
+        String uniqFileName = "gamesXmls/SaveFileUploaded" + gameName + ".xml";
+        System.out.println("save the file : " + uniqFileName);
         File file =new File(uniqFileName);
+        System.out.println(file.toPath());
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, file.toPath());
         }
@@ -55,7 +74,7 @@ public class loadGameServlet extends HttpServlet {
             //Files.deleteIfExists(file.toPath());
         }
         catch (Exception e){
-            //Files.deleteIfExists(file.toPath());
+            Files.deleteIfExists(file.toPath());
             System.out.println("ERROR!");
             System.out.println(e.getMessage());
             session.setAttribute("errorLoadfile", e.getMessage());
