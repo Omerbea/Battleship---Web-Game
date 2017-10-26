@@ -51,26 +51,31 @@ public class FinalStatisticsServlet extends HttpServlet {
         if (statusIsITheFirst2BackLobby == null){
             //I the First
             getServletContext().setAttribute("finish"+gameName, "yes");
+            System.out.println("im the first back to lobby");
         }
+
         else{
             //I the second I can Delete gameManager
             getServletContext().removeAttribute("finish"+gameName);
             String userName=(String) session.getAttribute("userName");
             restartGameManager(gameName,gameManager, lobbyManager, userName);
+            System.out.println("im the second back to lobby");
 
         }
 
     }
 
     public void restartGameManager (String gameName , GameManager gameManager, LobbyManager lobbyManager , String userName){
-        String fileName = gameManager.getFileName();
-        lobbyManager.removePlayerFromList(gameName);
+        GameLobbyDetailes gameLobbyDetailes = lobbyManager.getGameLobbyDetailsByName(gameName);
+        gameLobbyDetailes.restartGameDetailes();
+        /*String fileName = gameManager.getFileName();
+        lobbyManager.removeGameManager(gameName);
 
         try {
             lobbyManager.setNewGame(fileName, gameName, userName);
         }
         catch (Exception e){
             System.out.println("Error! exeption: " + e.getMessage());
-        }
+        }*/
     }
 }

@@ -14,7 +14,7 @@ public class LobbyManager {
             throw new Exception("Game name already exists in the Lobby ");
         }
         if (gameManager.loadFile(pathFileXml)){
-            GameLobbyDetailes gameDetailes = createGameDetailes ( gameManager, gameName,playerName);
+            GameLobbyDetailes gameDetailes = createGameDetailes ( gameManager, gameName,playerName, pathFileXml);
             this.games.put(gameName,gameDetailes);
             System.out.println("Lobby: Done set new game ");
         }
@@ -22,6 +22,14 @@ public class LobbyManager {
             System.out.println("Warning: game already run");
             throw new Exception("game already run");
         }
+    }
+
+    public void restartGameAndDetails (String gameName){
+        GameManager gameManager = getGameManagerByName(gameName);
+        GameLobbyDetailes gameLobbyDetailes = getGameLobbyDetailsByName(gameName);
+
+        gameLobbyDetailes.restartGameDetailes();
+
     }
 
     public void setGameIsActive (String gameName){
@@ -50,10 +58,10 @@ public class LobbyManager {
         return games.get(name).getGameManager();
     }
 
-    private GameLobbyDetailes createGameDetailes ( GameManager gameManager, String gameName, String playerName){
+    private GameLobbyDetailes createGameDetailes ( GameManager gameManager, String gameName, String playerName, String pathFile){
         int boardSize = gameManager.getBoardSize();
         String typeGame = gameManager.getGameType();
-        GameLobbyDetailes gameDetailes = new GameLobbyDetailes(gameName, playerName, boardSize, typeGame, gameManager);
+        GameLobbyDetailes gameDetailes = new GameLobbyDetailes(gameName, playerName, boardSize, typeGame, gameManager, pathFile);
         return  gameDetailes;
     }
 

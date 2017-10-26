@@ -85,8 +85,9 @@ public class ExecuteMoveServlet extends HttpServlet {
         }
         //get ready board
         char [][] playerBoard = gameManager.getBoardByPlayerNumber(player);
+        System.out.println("get my board");
         char [][] rivalBoard = gameManager.getRivalBoardByPlayerNumber(player);
-
+        System.out.println("get rival board");
         // get ready statistics
         Statistics statistics = gameManager.getGameStatisticByPlayer(player);
 

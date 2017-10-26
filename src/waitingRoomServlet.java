@@ -8,11 +8,11 @@ import java.io.IOException;
 
 @WebServlet(name = "waitingRoomServlet" , urlPatterns = {"/waitingRoom"})
 public class waitingRoomServlet extends HttpServlet {
-    private int playerNumber = 1 ;
+    //private int playerNumber = 1 ;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("wattingRoom" + playerNumber);
+        System.out.println("in wattingRoom");
         boolean isFirstTime = false ;
 
         LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
@@ -33,8 +33,9 @@ public class waitingRoomServlet extends HttpServlet {
                 req.getRequestDispatcher("/jsp/lobby.jsp").forward(req , resp);
                 return;
             }
+            int playerNumber = 1 + currentDetails.amountOfPlayersInGame() ;
             System.out.println(playerNumber);
-            session.setAttribute("playerNumber" , playerNumber++);
+            session.setAttribute("playerNumber" , playerNumber);
 
             currentDetails.addPlayerEntered();
             isFirstTime = true ;

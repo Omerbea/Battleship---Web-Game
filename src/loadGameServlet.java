@@ -14,6 +14,7 @@ import java.util.Iterator;
 @MultipartConfig
 @WebServlet(name = "loadGameServlet" , urlPatterns = {"/loadGame"})
 public class loadGameServlet extends HttpServlet {
+    int uniqNumber = 4;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     //handle session
@@ -37,7 +38,9 @@ public class loadGameServlet extends HttpServlet {
         InputStream fileContent = filePart.getInputStream();
         System.out.println(fileContent);
         //TODO: change the path to be relative path
-        File file =new File("SaveFileUploaded4.xml");
+        String uniqFileName = "SaveFileUploaded" + gameName + ".xml";
+
+        File file =new File(uniqFileName);
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, file.toPath());
         }
@@ -49,10 +52,10 @@ public class loadGameServlet extends HttpServlet {
             //gameManager.loadFile(file.getAbsolutePath());
 
 
-            Files.deleteIfExists(file.toPath());
+            //Files.deleteIfExists(file.toPath());
         }
         catch (Exception e){
-            Files.deleteIfExists(file.toPath());
+            //Files.deleteIfExists(file.toPath());
             System.out.println("ERROR!");
             System.out.println(e.getMessage());
             session.setAttribute("errorLoadfile", e.getMessage());

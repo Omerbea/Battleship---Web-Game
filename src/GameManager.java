@@ -212,7 +212,8 @@ public class GameManager {
         this.userInterface.printMenu(mainMenu,"middle");
         this.replayTurns = new ArrayList<>();
         replayIndex = 0;
-
+        this.isGameOver=false;
+        this.quitGame =false;
         return true;
     }
 
