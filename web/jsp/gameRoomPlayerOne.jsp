@@ -7,7 +7,9 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">Game Room Player1     <form method="get" action="/finalStatistics" enctype="multipart/form-data">
+    <div class="header">
+        <label class="player-name"><%=session.getAttribute("playerName")%></label>
+        <form method="get" action="/finalStatistics" enctype="multipart/form-data">
         <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
@@ -106,6 +108,7 @@
     }
 
     function getData() {
+
         $.ajax({
             type: "GET" ,
             url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 0 ,
@@ -126,7 +129,13 @@
             for(var j = 0 ; j < boardSize ; j++) {
                 var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
                 var jRivalCell = $(rivalCell);
-                jRivalCell.attr("disabled", isBoardActive);
+                console.log(jRivalCell.val());
+                if(jRivalCell.val() === "") {
+                    console.log(jRivalCell.val());
+                    jRivalCell.css("background-color" , "");
+                    jRivalCell.attr("disabled", isBoardActive);
+                }
+
             }
         }
         logoutBtn.disabled = isBoardActive;
@@ -141,10 +150,13 @@
         var rivalBoard = data[3];
         var statistics = data[0];
         var myUIBoard = $(".myBoard")[0];
+
+        var pName = data[5];
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
         gIsMyTurn = data[1];
         gNumOfMines = data[0].numofMines;
+
 
         if(gNumOfMines == 0) {
             $('.mine-img').hide();
@@ -163,13 +175,43 @@
                 jCell.attr('ondragover' , "allowDrop(event)");
                 var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
                 var jRivalCell = $(rivalCell);
+
                 console.log(rivalBoard[i][j]);
                 if(rivalBoard[i][j] != 'X' &&
                     rivalBoard[i][j] != '-') {
 
-                } else {
-                    jRivalCell.val(rivalBoard[i][j]);
-                }
+                    rivalCell.addEventListener('mouseover' , function (event) {
+                        console.log("on mouse over");
+                        var btn = $(event.target);
+                        btn.css("background-color" , "green");});
+
+
+                    rivalCell.addEventListener('mouseleave' , function (event) {
+                        console.log("on mouse leave");
+                        var btn1 = $(event.target);
+                        btn1.css("background-color", "");
+                    })
+
+
+                } else
+                    {
+
+                        jRivalCell.val(rivalBoard[i][j]);
+                        rivalCell.addEventListener('mouseover', function (event) {
+                            console.log("on mouse over");
+                            var btn = $(event.target);
+                            btn.css("background-color", "red");
+
+                        });
+
+
+                        rivalCell.addEventListener('mouseleave', function (event) {
+                            console.log("on mouse leave");
+                            var btn1 = $(event.target);
+                            btn1.css("background-color", "");
+
+                        })
+                    }
             }
         }
         console.log("current score:" + statistics.score);
@@ -256,7 +298,8 @@
                 cellBtn.style.width= '100%';
 
                 if(!isMyBoard) {
-                    cellBtn.addEventListener('click', getData, false);
+                    cellBtn.addEventListener('click', doOnClick, false);
+                    
 
                 }
                 td.appendChild(cellBtn);
@@ -267,6 +310,15 @@
         //$('myBoardSection').add
     }
     var countForDebug =0;
+
+    function doOnClick (){
+        console.log("doonclick")
+        getData();
+        console.log("after GetData");
+        console.log("after disabled");
+    }
+
+
     function pullingIsMyTurn() {
         console.log("pullingIsMyTurn count : "+ countForDebug);
         countForDebug++;
