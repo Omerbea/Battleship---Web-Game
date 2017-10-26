@@ -345,6 +345,7 @@ public class GameManager {
         long deltaTime = finishTime - startTime ;
         //For the next turn;
         startTime = System.nanoTime();
+        System.out.println(startTime);
         players[whoPlay].setAvargeTimeTurn(deltaTime);
         gameStatistic.incrementTurn();
 

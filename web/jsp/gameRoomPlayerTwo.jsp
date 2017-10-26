@@ -110,7 +110,7 @@
     function getData() {
         $.ajax({
             type: "GET" ,
-            url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 0 ,
+            url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 1 ,
             //url:"/ExecuteMove",
             success : function(result) {
                 updateUiData(result);
@@ -179,26 +179,20 @@
         console.log(data);
         var statusLabelText = $('.statusLabel')[0];
         if(data[4] === "non") {
-            statusLabelText.textContent = "You Miss! Try again next turn.";
+            showStatus(statusLabelText ,  "You Miss! Try again next turn.");
         } else if (data[4] === "hit") {
-            statusLabelText.textContent = "You Hit! You have another turn.";
+            showStatus(statusLabelText ,  "You Hit! You have another turn.");
         } else if(data[4] === "Win") {
-            setTimeout(function() {
-                console.log("in settimeout");
-                statusLabelText.textContent = "You Win! Good job!";
-            } , 2000);
+            showStatus(statusLabelText ,  "You Win! Good job!");
             window.location.href = "/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalWin") {
+            showStatus(statusLabelText ,  "You Lose! See you next game.");
             setTimeout(function() {
-
-                statusLabelText.textContent = "You Lose! See you next game.";
+                statusLabelText = " ";
             } , 2000);
             window.location.href = "/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalQuit") {
-            setTimeout(function() {
-                console.log("in settimeout");
-                statusLabelText.textContent = "You Win! Good job!";
-            } , 2000);
+            showStatus(statusLabelText ,  "You Win! Good job!");
             window.location.href = "/jsp/finishGameStatistics.jsp";
 
         }
@@ -219,6 +213,13 @@
         }
 
 
+    }
+
+    function showStatus(item , msg) {
+        item.textContent = msg;
+        setTimeout(function() {
+            item.textContent = " ";
+        } , 3000);
     }
 
     function createTablesForElement(element , isMyBoard) {
@@ -280,8 +281,8 @@
                 //clearInterval(idPullingIsNotMyTurn);
             } else {
                 console.log("not my turn");
-                setBoardActive(true);
                 getDataNoCoordinates();
+                setBoardActive(true);
                 $.ajax({
                     type: "GET",
                     url: "/ExecuteMove",
