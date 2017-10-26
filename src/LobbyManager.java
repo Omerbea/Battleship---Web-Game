@@ -10,6 +10,9 @@ public class LobbyManager {
 
     public void setNewGame (String pathFileXml , String gameName,String playerName)throws Exception {
         GameManager gameManager = new GameManager();
+        if (gameName ==null || gameName.equals("")){
+            throw new Exception("you must insert name for the game");
+        }
         if (games.get(gameName) != null){
             throw new Exception("Game name already exists in the Lobby ");
         }
@@ -41,14 +44,6 @@ public class LobbyManager {
         }
     }
 
-    public void serGameAncative (String gameName){
-        if (gameName == null){
-            System.out.println("warring23");
-        }
-        else{
-            games.get(gameName).setActiveGame();
-        }
-    }
 
     public GameLobbyDetailes getGameLobbyDetailsByName(String name) {
         return games.get(name);
@@ -70,6 +65,12 @@ public class LobbyManager {
     }
 
     public void addPlayerToList(String name) throws Exception {
+        if (name == null){
+            throw new Exception("no user name");
+        }
+        if (name.equals("")){
+            throw  new Exception("you must insert user name");
+        }
         if(isPlayerExist(name)){
 
             throw new Exception("Player already exists");

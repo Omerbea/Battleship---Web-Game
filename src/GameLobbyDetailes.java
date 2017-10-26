@@ -44,6 +44,7 @@ public class GameLobbyDetailes {
         playersEnteredGame++;
     }
 
+
     public void removePlayerFromRoom() {
         playersEnteredGame--;
     }

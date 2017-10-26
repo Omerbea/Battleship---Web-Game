@@ -80,5 +80,24 @@ public class waitingRoomServlet extends HttpServlet {
         System.out.println("board size : " + req.getAttribute("boardSize"));
         req.getRequestDispatcher("/WEB-INF/waitingRoom.jsp").include(req, resp);*/
     }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        LobbyManager lobbyManager = (LobbyManager)getServletContext().getAttribute("lobbyManager");
+        req.removeAttribute("gameName");
+
+        //session
+        HttpSession session = req.getSession(false);
+        if (session == null){
+            System.out.println("TODO: handle witth error . go to log-in page");
+            //TODO: handle with error . go to log-in page
+        }
+        GameLobbyDetailes currentDetails = lobbyManager.getGameLobbyDetailsByName((String) session.getAttribute("gameName"));
+        currentDetails.removePlayerFromRoom();
+        session.removeAttribute("gameName");
+        session.removeAttribute("playerNumber" );
+
+        //redirect
+        resp.sendRedirect(req.getContextPath() + "/lobby");
+    }
 }

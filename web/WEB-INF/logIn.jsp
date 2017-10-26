@@ -17,7 +17,7 @@
                 <input  name="userName" type=text />
                 <label> password: </label>
                 <input  name="password" type=password />
-                <input type="submit" />
+                <input class="classSub" type="submit" />
                 <% if((String)request.getAttribute("errMsg") != null) { %>
                     <label><%=(String)request.getAttribute("errMsg")%></label>
                 <%}%>

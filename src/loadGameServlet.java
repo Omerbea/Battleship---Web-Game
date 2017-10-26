@@ -30,6 +30,8 @@ public class loadGameServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/logIn");
             return;
         }
+
+        session.removeAttribute("errorLoadfile");
     //get params
         String userName = (String)session.getAttribute("userName");
         String gameName = req.getParameter("nameGame");
@@ -59,8 +61,15 @@ public class loadGameServlet extends HttpServlet {
         String uniqFileName = "gamesXmls/SaveFileUploaded" + gameName + ".xml";
         System.out.println("save the file : " + uniqFileName);
         File file =new File(uniqFileName);
-        System.out.println(file.toPath());
+
         try (InputStream input = filePart.getInputStream()) {
+            if (file.exists()){
+                session.setAttribute("errorLoadfile", "Name exist in the lobby game already... choose anther name");
+                resp.setStatus(2);
+                resp.sendRedirect(req.getContextPath() + "/lobby");
+                return;
+            }
+            System.out.println(file.toPath());
             Files.copy(input, file.toPath());
         }
     // do vaildation to file and if the file is valid add to the system

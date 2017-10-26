@@ -97,16 +97,20 @@ public class ExecuteMoveServlet extends HttpServlet {
             isMyTurn = true;
         }
 
+        //get list of possible position for mine
+        ArrayList <Position> position = gameManager.getPossibolePositionsSetMine();
+
         System.out.println(statistics.getAvargeTimeTurn());
 
         // prepare response
         ArrayList <Object> array4Response = new ArrayList<Object>();
-        array4Response.add(statistics);
-        array4Response.add(isMyTurn);
-        array4Response.add(playerBoard);
-        array4Response.add(rivalBoard);
-        array4Response.add(resExecuteMove);
-        array4Response.add(session.getAttribute("userName"));
+        array4Response.add(statistics); //0
+        array4Response.add(isMyTurn); //1
+        array4Response.add(playerBoard); //2
+        array4Response.add(rivalBoard); //3
+        array4Response.add(resExecuteMove); //4
+        array4Response.add(session.getAttribute("userName")); //5
+        array4Response.add(position); //6
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         Gson gson = new GsonBuilder().create();

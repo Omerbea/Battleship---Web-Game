@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Pos;
 import sun.applet.Main;
 
 import java.lang.reflect.Array;
@@ -265,6 +266,18 @@ public class GameManager {
         else {
                 return false;
                 }
+    }
+
+    public ArrayList<Position> getPossibolePositionsSetMine (){
+        ArrayList<Position> positions = new ArrayList<>();
+        for (int i =0 ; i< this.getBoardSize(); i++){
+            for (int j =0 ; j< this.getBoardSize(); j++){
+                if (canSetMine(i,j)){
+                    positions.add(new Position(i,j));
+                }
+            }
+        }
+        return  positions;
     }
 
     public boolean canSetMine (int row, int column){
