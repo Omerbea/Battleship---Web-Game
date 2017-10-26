@@ -1,13 +1,16 @@
 <html>
 
 <head>
+    <%@page session="true"%>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/gameRoom/css/gameRoomStyle.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Game Room</title>
 </head>
 <body>
 <div class="container">
-    <div class="header">Game Room Player2   <form method="get" action="/finalStatistics" enctype="multipart/form-data">
+    <div class="header">
+        <label class="player-name">${sessionScope.playerName}</label>
+        <form method="get" action="/finalStatistics" enctype="multipart/form-data">
         <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
@@ -165,9 +168,23 @@
                 jCell.attr('ondragover' , "allowDrop(event)");
                 var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
                 var jRivalCell = $(rivalCell);
+
+                rivalCell.addEventListener('mouseover' , function (event) {
+                    console.log("on mouse over");
+                    var btn = $(event.target);
+                    btn.css("background-color" , "green");});
+
+
+                rivalCell.addEventListener('mouseleave' , function (event) {
+                    console.log("on mouse leave");
+                    var btn1 = $(event.target);
+                    btn1.css("background-color" , "");
+                });
+
                 console.log(rivalBoard[i][j]);
                 if(rivalBoard[i][j] != 'X' &&
                     rivalBoard[i][j] != '-') {
+
 
                 } else {
                     jRivalCell.val(rivalBoard[i][j]);
@@ -259,6 +276,7 @@
 
                 if(!isMyBoard) {
                     cellBtn.addEventListener('click', getData, false);
+
 
                 }
                 td.appendChild(cellBtn);
