@@ -25,7 +25,7 @@ public class quitGameServlet extends HttpServlet {
         lobbyManager.setGameIsActive((String)session.getAttribute("gameName"));
         gameManager.setQuitGame(true);
         gameManager.finishTheGame();
-        session.removeAttribute("gameName");
+        //session.removeAttribute("gameName");
         String addr = req.getContextPath() +"jsp/finishGameStatistics.jsp";
         System.out.println(addr);
         resp.sendRedirect(addr);
