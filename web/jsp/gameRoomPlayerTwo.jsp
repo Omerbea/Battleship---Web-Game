@@ -9,8 +9,9 @@
 <body>
 <div class="container">
     <div class="header">
-        <label class="player-name">${sessionScope.playerName}</label>
-        <form method="get" action="/quitGame" enctype="multipart/form-data">
+
+        <label class="player-name"></label>
+        <form method="post" action="/quitGame" enctype="multipart/form-data">
         <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
@@ -185,7 +186,9 @@
 
         gListOfMineCoordinates = data[6];
 
-        var pName = data[5];
+        var pNameStatus = $('.player-name')[0];
+        pNameStatus.textContent = data[5];
+
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
         gIsMyTurn = data[1];
