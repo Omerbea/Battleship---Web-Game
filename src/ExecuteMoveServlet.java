@@ -74,7 +74,8 @@ public class ExecuteMoveServlet extends HttpServlet {
         else if (gameManager.getIsGameOver()){
             //the game not running
             if (gameManager.getQuitGame()){
-                System.out.println("Rival quit");
+                System.out.println("im "+ player + " and my rival quit" );
+                //System.out.println("Rival quit");
                 resExecuteMove = "rivalQuit";
             }
             else{
@@ -98,9 +99,11 @@ public class ExecuteMoveServlet extends HttpServlet {
         }
 
         //get list of possible position for mine
-        ArrayList <Position> position = gameManager.getPossibolePositionsSetMine();
+        ArrayList <Position> position = gameManager.getPossibolePositionsSetMine(player);
 
         System.out.println(statistics.getAvargeTimeTurn());
+
+        System.out.println("im "+ player + "my res = " + resExecuteMove);
 
         // prepare response
         ArrayList <Object> array4Response = new ArrayList<Object>();

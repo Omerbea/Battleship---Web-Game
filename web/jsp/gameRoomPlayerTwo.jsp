@@ -158,6 +158,11 @@
             $('.tot-mine')[0].textContent = gNumOfMines;
         }
 
+        if(data[4] === "rivalQuit") {
+            showStatus(statusLabelText ,  "You Win! Good job!");
+            window.location.href = "/jsp/finishGameStatistics.jsp";
+
+        }
 
         for(var i = 0 ; i < boardSize ; i++) {
             for(var j = 0 ; j < boardSize ; j++) {

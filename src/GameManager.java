@@ -268,16 +268,30 @@ public class GameManager {
                 }
     }
 
-    public ArrayList<Position> getPossibolePositionsSetMine (){
+    public ArrayList<Position> getPossibolePositionsSetMine (int player){
         ArrayList<Position> positions = new ArrayList<>();
         for (int i =0 ; i< this.getBoardSize(); i++){
             for (int j =0 ; j< this.getBoardSize(); j++){
-                if (canSetMine(i,j)){
+                if (canSetMineByplayer(i,j, player)){
                     positions.add(new Position(i,j));
                 }
             }
         }
         return  positions;
+    }
+
+    public boolean canSetMineByplayer (int row, int column, int player){
+        Mine mine = new Mine("Mine");
+        mine.setCoordinates(row,column);
+        try {
+            validator.canGameToolBePlaced(mine, players[player].myBoard);
+        }
+        catch (Exception e){
+            //System.out.println("+-=-=-=-=-=--=-= return false");
+            return  false;
+        }
+        //System.out.println("+-=-=-=-=-=--=-= return true");
+        return  true;
     }
 
     public boolean canSetMine (int row, int column){
@@ -287,12 +301,13 @@ public class GameManager {
             validator.canGameToolBePlaced(mine, players[whoPlay].myBoard);
         }
         catch (Exception e){
-            System.out.println("+-=-=-=-=-=--=-= return false");
+            //System.out.println("+-=-=-=-=-=--=-= return false");
             return  false;
         }
-        System.out.println("+-=-=-=-=-=--=-= return true");
+        //System.out.println("+-=-=-=-=-=--=-= return true");
         return  true;
     }
+
     public   boolean quiteGame(){
         userInterface.printMassage("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         userInterface.printMassage("Hope you enjoyed:)");
