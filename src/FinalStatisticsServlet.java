@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class FinalStatisticsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("finalStatisticsServlet");
         //lobby manager handle
         LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
         if (lobbyManager == null){
