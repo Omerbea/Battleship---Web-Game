@@ -10,7 +10,7 @@
 <div class="container">
     <div class="header">
         <label class="player-name">${sessionScope.playerName}</label>
-        <form method="get" action="/finalStatistics" enctype="multipart/form-data">
+        <form method="get" action="/quitGame" enctype="multipart/form-data">
         <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>

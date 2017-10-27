@@ -5,7 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Game Room</title>
 </head>
-<body>
+<body>1
 <div class="container">
     <div class="header">
         <label class="player-name"><%=session.getAttribute("playerName")%></label>
@@ -161,6 +161,9 @@
                     jRivalCell.css("background-color" , "");
                     jRivalCell.attr("disabled", isBoardActive);
                 }else {
+                    if (jRivalCell.isDisabled){
+                        console.log("yes im disabled");
+                    }
                     jRivalCell.attr("disabled" , true);
                     console.log("hitMe: my"+ jRivalCell.val());
                 }
@@ -243,7 +246,6 @@
                         console.log("on mouse leave");
                         var btn1 = $(event.target);
                         btn1.css("background-color", "");
-                        x
                     })
                 }
             }
@@ -384,7 +386,7 @@
 
                 });
             }
-        },3000);
+        },2000);
         console.log("call to pullingIsMyTurn 1");
         //pullingIsMyTurn();
     }
