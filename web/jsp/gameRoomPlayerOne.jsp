@@ -266,7 +266,7 @@
             } , 2000);
             window.location.href = "/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalQuit") {
-            showStatus(statusLabelText ,  "You Win! Good job!");
+            showStatus(statusLabelText ,  "Rival Quit! You Win! Good job!");
             window.location.href = "/jsp/finishGameStatistics.jsp";
 
         }
@@ -376,6 +376,7 @@
                         if(result[4] == "rivalQuit") {
                             console.log("rival quit");
                            // window.location.href = window.location.pathname + '/lobby';
+                            getDataNoCoordinates();
                             console.log("after redirect quit");
                         }
                         console.log("gIsMyTurn= " + gIsMyTurn);
