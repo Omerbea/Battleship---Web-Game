@@ -86,7 +86,7 @@
         console.log(data);
 
         setTimeout(function(){
-            window.location.href = "/lobby";
+            //window.location.href = "/lobby";
         },5000);
     }
 

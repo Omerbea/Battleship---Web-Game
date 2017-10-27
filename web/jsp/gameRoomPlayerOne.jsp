@@ -375,7 +375,7 @@
                         gIsMyTurn = result[1]
                         if(result[4] == "rivalQuit") {
                             console.log("rival quit");
-                            window.location.href = window.location.pathname + '/lobby';
+                           // window.location.href = window.location.pathname + '/lobby';
                             console.log("after redirect quit");
                         }
                         console.log("gIsMyTurn= " + gIsMyTurn);
