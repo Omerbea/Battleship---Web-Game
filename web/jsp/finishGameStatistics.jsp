@@ -25,17 +25,18 @@
         <label class="winner-avg-time" >Average Time For Turn :</label><br></br>
         <label class="winner-hits" >Number Of Hits :</label><br></br>
         <label class="winner-miss" >Number Of Misses :</label><br></br>
-        <label class="total-turns" >Total Number Of Turns: </label><br></br>
+        <label class="total-turns-winner" >Total Number Of Turns: </label><br></br>
+        <label class="winner-total-mines" >Number of Mines not used: </label><br></br>
         <label class="winner-score" >Score: </label>
 
     </div>
     <div class="loser-stat">
-        <label >final statistics for : </label><br></br>
         <label class="loser-name" >name :</label><br></br>
         <label class="loser-avg-time" >Average Time For Turn :</label><br></br>
         <label class="loser-hits" >Number Of Hits :</label><br></br>
         <label class="loser-miss" >Number Of Misses :</label><br></br>
-        <label class="total-turns" >Total Number Of Turns: </label><br></br>
+        <label class="total-turns-loser" >Total Number Of Turns: </label><br></br>
+        <label class="loser-total-mines" >Number of Mines not used: </label><br></br>
         <label class="loser-score" >Score: </label>
     </div>
 </div>
@@ -57,7 +58,8 @@
     function updateUiData(data) {
         var player1data = data[0];
         var player2data = data[1];
-
+        console.log(player1data);
+        console.log(player2data);
         var avgTime = $('.winner-avg-time')[0];
         avgTime.textContent += player1data.avargeTimeTurn;
         avgTime = $('.loser-avg-time')[0];
@@ -68,14 +70,19 @@
         hits = $('.loser-hits')[0];
         hits.textContent += player2data.hits;
 
-        var miss = $('.winner-avg-time')[0];
+        var miss = $('.winner-miss')[0];
         miss.textContent += player1data.missNum;
-        miss = $('.loser-avg-time')[0];
+        miss = $('.loser-miss')[0];
         miss.textContent += player2data.missNum;
 
-        var turns = $('.total-turns')[0];
+        var miss = $('.winner-total-mines')[0];
+        miss.textContent += player1data.numofMines;
+        miss = $('.loser-total-mines')[0];
+        miss.textContent += player2data.numofMines;
+
+        var turns = $('.total-turns-winner')[0];
         turns.textContent += player1data.numOfTurns;
-        turns = $('.total-turns')[0];
+        turns = $('.total-turns-loser')[0];
         turns.textContent += player2data.numOfTurns;
 
         var score = $('.winner-score')[0];
@@ -87,7 +94,7 @@
 
         setTimeout(function(){
             window.location.href = "/lobby";
-        },5000);
+        },15000);
     }
 
 </script>

@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <label class="player-name"><%=session.getAttribute("playerName")%></label>
+        <label class="player-name"></label>
         <form method="post" action="/quitGame" enctype="multipart/form-data">
         <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
@@ -185,8 +185,9 @@
 
         gListOfMineCoordinates = data[6];
 
-        var pName = data[5];
-        var rivalUIBoard = $(".rivalBoard")[0];
+        var pNameStatus = $('.player-name')[0];
+        pNameStatus.textContent = data[5];var rivalUIBoard = $(".rivalBoard")[0];
+
         var isMyTurn = data[1];
         console.log("data1 : " + data[1]);
         gIsMyTurn = data[1];
@@ -247,7 +248,6 @@
                         console.log("on mouse leave");
                         var btn1 = $(event.target);
                         btn1.css("background-color", "");
-                        x
                     })
                 }
             }
