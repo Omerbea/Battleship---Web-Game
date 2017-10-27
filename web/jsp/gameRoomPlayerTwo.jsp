@@ -32,8 +32,35 @@
 
 <script type="text/javascript">
     var gNumOfMines = 0;
+    var gListOfMineCoordinates = 0;
     function allowDrop(ev) {
-        ev.preventDefault();
+
+
+        console.log(gListOfMineCoordinates);
+        row = $(ev.target)[0].parentNode.parentNode.rowIndex;
+        col = $(ev.target)[0].parentNode.cellIndex;
+        /*console.log("row : " + row );
+        console.log("col : " + col);*/
+        if(gListOfMineCoordinates.filter(function(coordinate){
+            return coordinate.row == row && coordinate.column == col;
+        }).length > 0){
+            ev.preventDefault();
+            console.log("can be placed");
+            var btn = $(event.target);
+            btn.css("background-color" , "green");
+        } else {
+            var btn = $(event.target);
+            btn.css("background-color" , "");
+
+        }
+    }
+
+    function leavingDrag(event) {
+        console.log("drag leave");
+
+        var btn = $(event.target);
+        btn.css("background-color" , "");
+
     }
 
     function drop(ev) {
@@ -111,6 +138,7 @@
     }
 
     function getData() {
+
         $.ajax({
             type: "GET" ,
             url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 1 ,
@@ -131,7 +159,15 @@
             for(var j = 0 ; j < boardSize ; j++) {
                 var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
                 var jRivalCell = $(rivalCell);
-                jRivalCell.attr("disabled", isBoardActive);
+                console.log(jRivalCell.val());
+                if(jRivalCell.val() === "") {
+                    jRivalCell.css("background-color" , "");
+                    jRivalCell.attr("disabled", isBoardActive);
+                }else {
+                    jRivalCell.attr("disabled" , true);
+                    console.log("hitMe: my"+ jRivalCell.val());
+                }
+
             }
         }
         logoutBtn.disabled = isBoardActive;
@@ -146,10 +182,16 @@
         var rivalBoard = data[3];
         var statistics = data[0];
         var myUIBoard = $(".myBoard")[0];
+
+        gListOfMineCoordinates = data[6];
+
+        var pName = data[5];
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
         gIsMyTurn = data[1];
         gNumOfMines = data[0].numofMines;
+
+
 
         if(gNumOfMines == 0) {
             $('.mine-img').hide();
@@ -171,28 +213,46 @@
                 jCell.val(myBoard[i][j]);
                 jCell.attr('ondrop' , "drop(event)");
                 jCell.attr('ondragover' , "allowDrop(event)");
+                jCell.attr('ondragleave' , "leavingDrag(event)");
                 var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
                 var jRivalCell = $(rivalCell);
-
-                rivalCell.addEventListener('mouseover' , function (event) {
-                    console.log("on mouse over");
-                    var btn = $(event.target);
-                    btn.css("background-color" , "green");});
-
-
-                rivalCell.addEventListener('mouseleave' , function (event) {
-                    console.log("on mouse leave");
-                    var btn1 = $(event.target);
-                    btn1.css("background-color" , "");
-                });
 
                 console.log(rivalBoard[i][j]);
                 if(rivalBoard[i][j] != 'X' &&
                     rivalBoard[i][j] != '-') {
 
+                    rivalCell.addEventListener('mouseover' , function (event) {
+                        console.log("on mouse over");
+                        var btn = $(event.target);
+                        btn.css("background-color" , "green");});
 
-                } else {
+
+                    rivalCell.addEventListener('mouseleave' , function (event) {
+                        console.log("on mouse leave");
+                        var btn1 = $(event.target);
+                        btn1.css("background-color", "");
+                    })
+
+
+                } else
+                {
+
                     jRivalCell.val(rivalBoard[i][j]);
+
+                    rivalCell.addEventListener('mouseover', function (event) {
+                        console.log("on mouse over");
+                        var btn = $(event.target);
+                        btn.css("background-color", "red");
+
+                    });
+
+
+                    rivalCell.addEventListener('mouseleave', function (event) {
+                        console.log("on mouse leave");
+                        var btn1 = $(event.target);
+                        btn1.css("background-color", "");
+                        x
+                    })
                 }
             }
         }
@@ -281,7 +341,9 @@
 
                 if(!isMyBoard) {
                     cellBtn.addEventListener('click', getData, false);
-
+                    cellBtn.addEventListener('click' , function(event){
+                        $(event.target).disabled = true;
+                    });
 
                 }
                 td.appendChild(cellBtn);
@@ -292,6 +354,14 @@
         //$('myBoardSection').add
     }
     var countForDebug =0;
+
+    function doOnClick (){
+        console.log("doonclick")
+        console.log("after GetData");
+        console.log("after disabled");
+    }
+
+
     function pullingIsMyTurn() {
         console.log("pullingIsMyTurn count : "+ countForDebug);
         countForDebug++;

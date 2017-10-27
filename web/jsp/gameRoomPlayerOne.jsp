@@ -29,8 +29,35 @@
 </body>
 <script type="text/javascript">
     var gNumOfMines = 0;
+    var gListOfMineCoordinates = 0;
     function allowDrop(ev) {
-        ev.preventDefault();
+
+
+        console.log(gListOfMineCoordinates);
+        row = $(ev.target)[0].parentNode.parentNode.rowIndex;
+        col = $(ev.target)[0].parentNode.cellIndex;
+        /*console.log("row : " + row );
+        console.log("col : " + col);*/
+        if(gListOfMineCoordinates.filter(function(coordinate){
+                return coordinate.row == row && coordinate.column == col;
+            }).length > 0){
+            ev.preventDefault();
+            console.log("can be placed");
+            var btn = $(event.target);
+            btn.css("background-color" , "green");
+        } else {
+            var btn = $(event.target);
+            btn.css("background-color" , "");
+
+        }
+    }
+
+    function leavingDrag(event) {
+        console.log("drag leave");
+
+        var btn = $(event.target);
+        btn.css("background-color" , "");
+
     }
 
     function drop(ev) {
@@ -131,9 +158,11 @@
                 var jRivalCell = $(rivalCell);
                 console.log(jRivalCell.val());
                 if(jRivalCell.val() === "") {
-                    console.log(jRivalCell.val());
                     jRivalCell.css("background-color" , "");
                     jRivalCell.attr("disabled", isBoardActive);
+                }else {
+                    jRivalCell.attr("disabled" , true);
+                    console.log("hitMe: my"+ jRivalCell.val());
                 }
 
             }
@@ -151,11 +180,14 @@
         var statistics = data[0];
         var myUIBoard = $(".myBoard")[0];
 
+        gListOfMineCoordinates = data[6];
+
         var pName = data[5];
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
         gIsMyTurn = data[1];
         gNumOfMines = data[0].numofMines;
+
 
 
         if(gNumOfMines == 0) {
@@ -173,6 +205,7 @@
                 jCell.val(myBoard[i][j]);
                 jCell.attr('ondrop' , "drop(event)");
                 jCell.attr('ondragover' , "allowDrop(event)");
+                jCell.attr('ondragleave' , "leavingDrag(event)");
                 var rivalCell = (rivalUIBoard.rows[i].cells[j]).childNodes[0];
                 var jRivalCell = $(rivalCell);
 
@@ -194,24 +227,25 @@
 
 
                 } else
-                    {
+                {
 
-                        jRivalCell.val(rivalBoard[i][j]);
-                        rivalCell.addEventListener('mouseover', function (event) {
-                            console.log("on mouse over");
-                            var btn = $(event.target);
-                            btn.css("background-color", "red");
+                    jRivalCell.val(rivalBoard[i][j]);
 
-                        });
+                    rivalCell.addEventListener('mouseover', function (event) {
+                        console.log("on mouse over");
+                        var btn = $(event.target);
+                        btn.css("background-color", "red");
+
+                    });
 
 
-                        rivalCell.addEventListener('mouseleave', function (event) {
-                            console.log("on mouse leave");
-                            var btn1 = $(event.target);
-                            btn1.css("background-color", "");
-
-                        })
-                    }
+                    rivalCell.addEventListener('mouseleave', function (event) {
+                        console.log("on mouse leave");
+                        var btn1 = $(event.target);
+                        btn1.css("background-color", "");
+                        x
+                    })
+                }
             }
         }
         console.log("current score:" + statistics.score);
@@ -299,7 +333,9 @@
 
                 if(!isMyBoard) {
                     cellBtn.addEventListener('click', getData, false);
-                    cellBtn.addEventListener('click' , doOnClick, false);
+                    cellBtn.addEventListener('click' , function(event){
+                        $(event.target).disabled = true;
+                    });
 
                 }
                 td.appendChild(cellBtn);
