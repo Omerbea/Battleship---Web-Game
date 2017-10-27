@@ -161,6 +161,9 @@
                     jRivalCell.css("background-color" , "");
                     jRivalCell.attr("disabled", isBoardActive);
                 }else {
+                    if (jRivalCell.isDisabled){
+                        console.log("yes im disabled");
+                    }
                     jRivalCell.attr("disabled" , true);
                     console.log("hitMe: my"+ jRivalCell.val());
                 }
@@ -185,6 +188,7 @@
         var pName = data[5];
         var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
+        console.log("data1 : " + data[1]);
         gIsMyTurn = data[1];
         gNumOfMines = data[0].numofMines;
 
@@ -384,7 +388,7 @@
 
                 });
             }
-        },3000);
+        },2000);
         console.log("call to pullingIsMyTurn 1");
         //pullingIsMyTurn();
     }
