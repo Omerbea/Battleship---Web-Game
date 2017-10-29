@@ -21,6 +21,7 @@
                         <th>Created By</th>
                         <th>Board Size</th>
                         <th>Game Type</th>
+                        <th>How Many Players Waiting</th>
                         <th>Active</th>
                     </tr>
                     </tbody>
@@ -76,6 +77,7 @@
                         "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
                         "<td>"+element.boardSize+"</td>" +
                         "<td>"+element.typeGame+"</td>" +
+                        "<td>"+element.playersEnteredGame+"</td>" +
                         "<td>"+element.isActiveGame+"</td>");
                 });
             }
@@ -137,6 +139,7 @@
                             "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
                             "<td>"+element.boardSize+"</td>" +
                             "<td>"+element.typeGame+"</td>" +
+                            "<td>"+element.playersEnteredGame+"</td>" +
                             "<td>"+element.isActiveGame+"</td>");
                     });
                 }
