@@ -104,7 +104,8 @@
                 }
                 else {
                     console.log ("error load..")
-                    $('.errorBoxLoadFile').append("<label>" + result + "</label>");
+                    showStatus($('.errorBoxLoadFile')[0] , result);
+                    //$('.errorBoxLoadFile').append("<label>" + result + "</label>");
 
                 }
             }
@@ -141,5 +142,12 @@
                 }
             });
         }, 2000);
+
+        function showStatus(item , msg) {
+            item.textContent = msg;
+            setTimeout(function() {
+                item.textContent = " ";
+            } , 3000);
+        }
     </script>
 </html>
