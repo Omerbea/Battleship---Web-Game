@@ -38,7 +38,7 @@
             <div class="uploadFile">
                 <form method="post" action="/loadGame" enctype="multipart/form-data">
                     <label> Upload Game </label>
-                    <input type="file" name="gameFile" accept="application/xml">
+                    <input type="file" name="gameFile" accept="application/xml" fi>
                     <P>
                         <label> Name Game</label>
                         <input name="nameGame" type="text" />
