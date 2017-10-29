@@ -257,21 +257,25 @@
             window.location.href = "/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalQuit") {
             showStatus(statusLabelText ,  "Rival Quit! You Win! Good job!");
-            window.location.href = "/jsp/finishGameStatistics.jsp";
+            setTimeout(function() {
+                window.location.href = "/jsp/finishGameStatistics.jsp";
+            } , 3000);
 
         }
 
         $(".score").html(statistics.score);
         $(".game-type")[0].textContent = gameType;
         $(".time").html(statistics.avargeTimeTurn);
-        $(".isTurn")[0].textContent = gIsMyTurn;
+
         $(".turns").html(statistics.numOfTurns);
         var rivalUIBoard = $(".rivalBoardSection");
         if(isMyTurn) {
+            $(".isTurn")[0].textContent = "Yes";
             console.log("its your turn");
             setBoardActive(false);
 
         } else {
+            $(".isTurn")[0].textContent = "No";
             console.log("its NOT your turn");
             setBoardActive(true);
 
