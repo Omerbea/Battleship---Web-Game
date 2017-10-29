@@ -23,6 +23,7 @@
                         <th>Game Type</th>
                         <th>How Many Players Waiting</th>
                         <th>Active</th>
+                        <th>Delete Game</th>
                     </tr>
                     </tbody>
                 </table>
@@ -78,7 +79,8 @@
                         "<td>"+element.boardSize+"</td>" +
                         "<td>"+element.typeGame+"</td>" +
                         "<td>"+element.playersEnteredGame+"</td>" +
-                        "<td>"+element.isActiveGame+"</td>");
+                        "<td>"+element.isActiveGame+"</td>" +
+                        "<td><a href=\"removeGameByPlayer?gameName="+element.name+"\">Delete</a></td>");
                 });
             }
         });
@@ -140,7 +142,8 @@
                             "<td>"+element.boardSize+"</td>" +
                             "<td>"+element.typeGame+"</td>" +
                             "<td>"+element.playersEnteredGame+"</td>" +
-                            "<td>"+element.isActiveGame+"</td>");
+                            "<td>"+element.isActiveGame+"</td>" +
+                            "<td><a href=\"removeGameByPlayer?gameName="+element.name+"\">Delete</a></td>");
                     });
                 }
             });
