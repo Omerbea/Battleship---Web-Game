@@ -14,6 +14,7 @@
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
     <div class="statSection">
+        <br><label>Your turn to play: </label><br><label class="isTurn"></label><br>
         <br><label>Score : </label><label class="score">0</label><br>
         <br><label>Avg Time : </label><label class="time">0</label><br>
         <br><label>Turn Played : </label><label class="turns">0</label><br>
@@ -260,7 +261,8 @@
 
         $(".score").html(statistics.score);
         $(".time").html(statistics.avargeTimeTurn);
-        //$(".turns").html(statistics.avargeTimeTurn);
+        $(".isTurn")[0].textContent = gIsMyTurn;
+        $(".turns").html(statistics.numOfTurns);
         var rivalUIBoard = $(".rivalBoardSection");
         if(isMyTurn) {
             console.log("its your turn");
