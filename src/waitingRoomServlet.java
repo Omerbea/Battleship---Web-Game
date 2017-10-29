@@ -19,8 +19,8 @@ public class waitingRoomServlet extends HttpServlet {
         GameLobbyDetailes currentDetails = lobbyManager.getGameLobbyDetailsByName((String)req.getParameter("gameName"));
         if (currentDetails.isActiveGame == "yes"){
             System.out.println("warnign : active game already");
-            req.getRequestDispatcher("/jsp/lobby.jsp").forward(req , resp);
-            return;
+            //req.getRequestDispatcher("/jsp/lobby.jsp").forward(req , resp);
+            //return;
         }
         String gameName = (String)req.getParameter("gameName");
         GameManager currentManager = lobbyManager.getGameManagerByName(gameName);
