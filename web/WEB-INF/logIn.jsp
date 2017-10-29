@@ -12,7 +12,7 @@
 		    <h1> Log In Page </h1>
         </div>
         <div class="loginform">
-            <form method="post" action="/logIn">
+            <form method="post" action="${pageContext.request.contextPath}/logIn">
                 <label> user name: </label>
                 <input  name="userName" type=text />
                 <br><br>

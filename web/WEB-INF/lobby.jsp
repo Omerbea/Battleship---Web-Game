@@ -38,7 +38,7 @@
                 </table>
             </div>
             <div class="uploadFile">
-                <form method="post" action="/loadGame" enctype="multipart/form-data">
+                <form method="post" action="${pageContext.request.contextPath}/loadGame" enctype="multipart/form-data">
                     <label> Upload Game </label>
                     <input type="file" name="gameFile" accept="application/xml" fi>
                     <P>
@@ -59,7 +59,7 @@
         function logout() {
             $.ajax({
                 type: "GET",
-                url: "/logout",
+                url: "${pageContext.request.contextPath}/logout",
                 success: function () {
                     console.log("redirected to login.");
                     window.location.replace("../logIn");
@@ -69,7 +69,7 @@
 
         $.ajax({
             type: "GET" ,
-            url : "/activeGamesData" ,
+            url : "${pageContext.request.contextPath}/activeGamesData" ,
             success : function(result) {
                 console.log(result);
                 $('.gamesList tbody td').remove();
@@ -87,7 +87,7 @@
 
         $.ajax({
             type: "GET" ,
-            url : "/activePlayersData" ,
+            url : "${pageContext.request.contextPath}/activePlayersData" ,
             success : function(result) {
                 console.log(result);
                 $('.activePlayers tbody td').remove();
@@ -98,7 +98,7 @@
         });
          $.ajax({
             type: "GET" ,
-            url : "/errorCodeLoadGame" ,
+            url : "${pageContext.request.contextPath}/errorCodeLoadGame" ,
             success : function(result) {
                 console.log ("errorCoseLoadGame():")
                 console.log(result);
@@ -118,7 +118,7 @@
         var intervalActivatePlayers = setInterval(function () {
             $.ajax({
                 type: "GET" ,
-                url : "/activePlayersData" ,
+                url : "${pageContext.request.contextPath}/activePlayersData" ,
                 success : function(result) {
                     console.log(result);
                     $('.activePlayers tbody td').remove();
@@ -132,7 +132,7 @@
         var intervalActivateGame = setInterval(function () {
             $.ajax({
                 type: "GET" ,
-                url : "/activeGamesData" ,
+                url : "${pageContext.request.contextPath}/activeGamesData" ,
                 success : function(result) {
                     console.log(result);
                     $('.gamesList tbody td').remove();
@@ -153,7 +153,7 @@
 
             $.ajax({
                 type: "GET" ,
-                url : "/removeGameByPlayer?gameName="+event.target.parentNode.parentNode.children[0].textContent ,
+                url : "${pageContext.request.contextPath}/removeGameByPlayer?gameName="+event.target.parentNode.parentNode.children[0].textContent ,
                 success : function(result) {
                     console.log(result);
                 }

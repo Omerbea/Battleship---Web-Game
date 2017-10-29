@@ -48,7 +48,7 @@
         console.log("callTofinalStatistics");
         $.ajax({
             type: "GET" ,
-            url : "/finalStatistics",
+            url : "${pageContext.request.contextPath}/finalStatistics",
             //url:"/ExecuteMove",
             success : function(result) {
                 updateUiData(result);
@@ -119,7 +119,7 @@
         console.log(data);
 
         setTimeout(function(){
-            window.location.href = "/lobby";
+            window.location.href = "${pageContext.request.contextPath}/lobby";
         },15000);
     }
 

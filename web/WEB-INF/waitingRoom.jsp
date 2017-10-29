@@ -32,7 +32,7 @@
         var id = setInterval(function () {
             $.ajax({
                 type: "GET",
-                url: "/activeGamesData",
+                url: "${pageContext.request.contextPath}/activeGamesData",
                 success: function (result) {
                     console.log(result);
                     console.log(result);
