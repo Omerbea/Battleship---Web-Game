@@ -18,6 +18,7 @@
         <br><label>Score : </label><label class="score">0</label><br>
         <br><label>Avg Time : </label><label class="time">0</label><br>
         <br><label>Turn Played : </label><label class="turns">0</label><br>
+        <br><label>Game Type : </label><label class="game-type"></label><br>
     </div>
     <div class="toolSection">Tools section
         <br><br>
@@ -183,6 +184,7 @@
         var myBoard = data[2];
         var rivalBoard = data[3];
         var statistics = data[0];
+        var gameType = data[7];
         var myUIBoard = $(".myBoard")[0];
 
         gListOfMineCoordinates = data[6];
@@ -260,6 +262,7 @@
         }
 
         $(".score").html(statistics.score);
+        $(".game-type")[0].textContent = gameType;
         $(".time").html(statistics.avargeTimeTurn);
         $(".isTurn")[0].textContent = gIsMyTurn;
         $(".turns").html(statistics.numOfTurns);
