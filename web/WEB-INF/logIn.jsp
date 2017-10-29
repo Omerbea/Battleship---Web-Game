@@ -15,8 +15,10 @@
             <form method="post" action="/logIn">
                 <label> user name: </label>
                 <input  name="userName" type=text />
+                <br><br>
                 <label> password: </label>
                 <input  name="password" type=password />
+                <br><br>
                 <input class="classSub" type="submit" />
                 <% if((String)request.getAttribute("errMsg") != null) { %>
                     <label><%=(String)request.getAttribute("errMsg")%></label>
