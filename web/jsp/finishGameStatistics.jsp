@@ -63,7 +63,7 @@
         console.log(player2data);
 
         var winnerTitle = $('.announce-winner')[0];
-        if(player1data.playerNameQuit != null || player1data.playerNameQuit != "" ) {
+        if(player1data.playerNameQuit != null) {
             console.log("player name : " + player1data.playerName + " playernamequit : " + player1data.playerNameQuit);
             if(player1data.playerName == player1data.playerNameQuit) {
                 winnerTitle.textContent += player2data.playerName;
@@ -88,7 +88,7 @@
 
         var avgTime = $('.winner-avg-time')[0];
         avgTime.textContent += player1data.avargeTimeTurn;
-        avgTime = $('.loser-avg-time')[0];
+         avgTime = $('.loser-avg-time')[0];
         avgTime.textContent += player2data.avargeTimeTurn;
 
         var hits = $('.winner-hits')[0];
