@@ -231,14 +231,15 @@
 
                     jRivalCell.val(rivalBoard[i][j]);
                     if(rivalBoard[i][j] == 'X') {
-                        jRivalCell.css("background-color", "Tomato");
+                        jRivalCell.css("background-color", "LightSeaGreen");
                     } else {
                         jRivalCell.css("background-color", "DarkGrey");
                     }
 
-                    if(myBoard[i][j] == 'X') {
-                        jCell.css("background-color", "Tomato");
-                    }
+                }
+
+                if(myBoard[i][j] == 'X') {
+                    jCell.css("background-color", "Tomato");
                 }
             }
         }

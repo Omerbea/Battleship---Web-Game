@@ -62,7 +62,7 @@
                 url: "${pageContext.request.contextPath}/logout",
                 success: function () {
                     console.log("redirected to login.");
-                    window.location.replace("../logIn");
+                    window.location.replace("${pageContext.request.contextPath}/logIn");
                 }
             });
         }
@@ -74,14 +74,25 @@
                 console.log(result);
                 $('.gamesList tbody td').remove();
                 $.each(result,function(index , element) {
-                    $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
-                        "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
-                        "<td>"+element.boardSize+"</td>" +
-                        "<td>"+element.typeGame+"</td>" +
-                        "<td>"+element.playersEnteredGame+"</td>" +
-                        "<td>"+element.isActiveGame+"</td>" +
-                        "<td><button onclick='removeGame()'>Delete</button></td>");
+                    if(element.playersEnteredGame < 2) {
+                        $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName=" + element.name + "\">" + element.name + "</a></td>" +
+                            "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                            "<td>" + element.boardSize + "</td>" +
+                            "<td>" + element.typeGame + "</td>" +
+                            "<td>" + element.playersEnteredGame + "</td>" +
+                            "<td>" + element.isActiveGame + "</td>" +
+                            "<td><button onclick='removeGame()'>Delete</button></td>");
+                    } else {
+                        $('.gamesList tbody').append("<tr><td><a>" + element.name + "</a></td>" +
+                            "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                            "<td>" + element.boardSize + "</td>" +
+                            "<td>" + element.typeGame + "</td>" +
+                            "<td>" + element.playersEnteredGame + "</td>" +
+                            "<td>" + element.isActiveGame + "</td>" +
+                            "<td><button onclick='removeGame()'>Delete</button></td>");
+                    }
                 });
+
             }
         });
 
@@ -137,13 +148,23 @@
                     console.log(result);
                     $('.gamesList tbody td').remove();
                     $.each(result,function(index , element) {
-                        $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
-                            "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
-                            "<td>"+element.boardSize+"</td>" +
-                            "<td>"+element.typeGame+"</td>" +
-                            "<td>"+element.playersEnteredGame+"</td>" +
-                            "<td>"+element.isActiveGame+"</td>" +
-                            "<td><button onclick='removeGame()'>Delete</button></td>");
+                        if(element.playersEnteredGame < 2) {
+                            $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName=" + element.name + "\">" + element.name + "</a></td>" +
+                                "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                                "<td>" + element.boardSize + "</td>" +
+                                "<td>" + element.typeGame + "</td>" +
+                                "<td>" + element.playersEnteredGame + "</td>" +
+                                "<td>" + element.isActiveGame + "</td>" +
+                                "<td><button onclick='removeGame()'>Delete</button></td>");
+                        } else {
+                            $('.gamesList tbody').append("<tr><td><a>" + element.name + "</a></td>" +
+                                "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                                "<td>" + element.boardSize + "</td>" +
+                                "<td>" + element.typeGame + "</td>" +
+                                "<td>" + element.playersEnteredGame + "</td>" +
+                                "<td>" + element.isActiveGame + "</td>" +
+                                "<td><button onclick='removeGame()'>Delete</button></td>");
+                        }
                     });
                 }
             });

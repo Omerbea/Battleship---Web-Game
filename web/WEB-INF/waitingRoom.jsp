@@ -10,7 +10,7 @@
     <h1><div class="wait">Waiting for another player to enter game. please wait</div></h1>
 </div>
 <div >
-    <form method="post" action="/waitingRoom">
+    <form method="post" action="${pageContext.request.contextPath}/waitingRoom">
         <label> Go Back to Lobby</label>
         <input class="classSub" type="submit" />
 

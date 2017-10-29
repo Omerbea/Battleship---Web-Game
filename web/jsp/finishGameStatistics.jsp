@@ -120,7 +120,7 @@
 
         setTimeout(function(){
             window.location.href = "${pageContext.request.contextPath}/lobby";
-        },15000);
+        },7000);
     }
 
 </script>
