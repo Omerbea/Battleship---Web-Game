@@ -63,10 +63,19 @@
         console.log(player2data);
 
         var winnerTitle = $('.announce-winner')[0];
-        if(player1data.score > player2data.score ) {
-            winnerTitle.textContent += player1data.playerName;
+        if(player1data.playerNameQuit != null || player1data.playerNameQuit != "" ) {
+            if(player1data.playerName == player1data.playerNameQuit) {
+                winnerTitle.textContent += player2data.playerName;
+            } else {
+                winnerTitle.textContent += player1data.playerName;
+            }
+
         } else {
-            winnerTitle.textContent += player2data.playerName;
+            if (player1data.score > player2data.score) {
+                winnerTitle.textContent += player1data.playerName;
+            } else {
+                winnerTitle.textContent += player2data.playerName;
+            }
         }
 
         var name = $('.winner-name')[0];
