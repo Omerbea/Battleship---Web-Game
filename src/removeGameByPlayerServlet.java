@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 @WebServlet(name = "removeGameByPlayerServlet" , urlPatterns = {"/removeGameByPlayer"})
 public class removeGameByPlayerServlet extends HttpServlet {
@@ -24,9 +26,16 @@ public class removeGameByPlayerServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
             return;
         }
+
+
         String namePlayer = (String)session.getAttribute("userName");
         //TODO: change the game name get from the req
         String gameName =  req.getParameter("gameName");
         lobbyManager.removeGameManagerByplayer(gameName, namePlayer);
+        String fileName = "gamesXmls/SaveFileUploaded" + gameName + ".xml";
+        File file =new File(fileName);
+
+        Files.deleteIfExists(file.toPath());
+
     }
 }

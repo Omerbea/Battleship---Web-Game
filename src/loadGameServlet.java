@@ -94,10 +94,7 @@ public class loadGameServlet extends HttpServlet {
         try {
 
             String nameFileForDebug = filePart.getName();
-            String f = filePart.getHeader("fileItem");
-            if (!filePart.getName().endsWith(".xml")){
-                //throw new Exception("You must insert xml file");
-            }
+
             LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
             lobbyManager.setNewGame(file.toPath().toString(), gameName, userName);
             //gameManager.loadFile(file.getAbsolutePath());
