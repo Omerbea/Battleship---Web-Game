@@ -38,7 +38,7 @@
                 </table>
             </div>
             <div class="uploadFile">
-                <form method="post" action="/loadGame" enctype="multipart/form-data">
+                <form method="post" action="${pageContext.request.contextPath}/loadGame" enctype="multipart/form-data">
                     <label> Upload Game </label>
                     <input type="file" name="gameFile" accept="application/xml" fi>
                     <P>
@@ -59,35 +59,46 @@
         function logout() {
             $.ajax({
                 type: "GET",
-                url: "/logout",
+                url: "${pageContext.request.contextPath}/logout",
                 success: function () {
                     console.log("redirected to login.");
-                    window.location.replace("../logIn");
+                    window.location.replace("${pageContext.request.contextPath}/logIn");
                 }
             });
         }
 
         $.ajax({
             type: "GET" ,
-            url : "/activeGamesData" ,
+            url : "${pageContext.request.contextPath}/activeGamesData" ,
             success : function(result) {
                 console.log(result);
                 $('.gamesList tbody td').remove();
                 $.each(result,function(index , element) {
-                    $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
-                        "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
-                        "<td>"+element.boardSize+"</td>" +
-                        "<td>"+element.typeGame+"</td>" +
-                        "<td>"+element.playersEnteredGame+"</td>" +
-                        "<td>"+element.isActiveGame+"</td>" +
-                        "<td><button onclick='removeGame()'>Delete</button></td>");
+                    if(element.playersEnteredGame < 2) {
+                        $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName=" + element.name + "\">" + element.name + "</a></td>" +
+                            "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                            "<td>" + element.boardSize + "</td>" +
+                            "<td>" + element.typeGame + "</td>" +
+                            "<td>" + element.playersEnteredGame + "</td>" +
+                            "<td>" + element.isActiveGame + "</td>" +
+                            "<td><button onclick='removeGame()'>Delete</button></td>");
+                    } else {
+                        $('.gamesList tbody').append("<tr><td><a>" + element.name + "</a></td>" +
+                            "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                            "<td>" + element.boardSize + "</td>" +
+                            "<td>" + element.typeGame + "</td>" +
+                            "<td>" + element.playersEnteredGame + "</td>" +
+                            "<td>" + element.isActiveGame + "</td>" +
+                            "<td><button onclick='removeGame()'>Delete</button></td>");
+                    }
                 });
+
             }
         });
 
         $.ajax({
             type: "GET" ,
-            url : "/activePlayersData" ,
+            url : "${pageContext.request.contextPath}/activePlayersData" ,
             success : function(result) {
                 console.log(result);
                 $('.activePlayers tbody td').remove();
@@ -98,7 +109,7 @@
         });
          $.ajax({
             type: "GET" ,
-            url : "/errorCodeLoadGame" ,
+            url : "${pageContext.request.contextPath}/errorCodeLoadGame" ,
             success : function(result) {
                 console.log ("errorCoseLoadGame():")
                 console.log(result);
@@ -118,7 +129,7 @@
         var intervalActivatePlayers = setInterval(function () {
             $.ajax({
                 type: "GET" ,
-                url : "/activePlayersData" ,
+                url : "${pageContext.request.contextPath}/activePlayersData" ,
                 success : function(result) {
                     console.log(result);
                     $('.activePlayers tbody td').remove();
@@ -132,18 +143,28 @@
         var intervalActivateGame = setInterval(function () {
             $.ajax({
                 type: "GET" ,
-                url : "/activeGamesData" ,
+                url : "${pageContext.request.contextPath}/activeGamesData" ,
                 success : function(result) {
                     console.log(result);
                     $('.gamesList tbody td').remove();
                     $.each(result,function(index , element) {
-                        $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName="+element.name+"\">"+element.name+"</a></td>" +
-                            "<td>"+element.playerNameThatLoadedCurrentGame+"</td>" +
-                            "<td>"+element.boardSize+"</td>" +
-                            "<td>"+element.typeGame+"</td>" +
-                            "<td>"+element.playersEnteredGame+"</td>" +
-                            "<td>"+element.isActiveGame+"</td>" +
-                            "<td><button onclick='removeGame()'>Delete</button></td>");
+                        if(element.playersEnteredGame < 2) {
+                            $('.gamesList tbody').append("<tr><td><a href=\"waitingRoom?gameName=" + element.name + "\">" + element.name + "</a></td>" +
+                                "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                                "<td>" + element.boardSize + "</td>" +
+                                "<td>" + element.typeGame + "</td>" +
+                                "<td>" + element.playersEnteredGame + "</td>" +
+                                "<td>" + element.isActiveGame + "</td>" +
+                                "<td><button onclick='removeGame()'>Delete</button></td>");
+                        } else {
+                            $('.gamesList tbody').append("<tr><td><a>" + element.name + "</a></td>" +
+                                "<td>" + element.playerNameThatLoadedCurrentGame + "</td>" +
+                                "<td>" + element.boardSize + "</td>" +
+                                "<td>" + element.typeGame + "</td>" +
+                                "<td>" + element.playersEnteredGame + "</td>" +
+                                "<td>" + element.isActiveGame + "</td>" +
+                                "<td><button onclick='removeGame()'>Delete</button></td>");
+                        }
                     });
                 }
             });
@@ -153,7 +174,7 @@
 
             $.ajax({
                 type: "GET" ,
-                url : "/removeGameByPlayer?gameName="+event.target.parentNode.parentNode.children[0].textContent ,
+                url : "${pageContext.request.contextPath}/removeGameByPlayer?gameName="+event.target.parentNode.parentNode.children[0].textContent ,
                 success : function(result) {
                     console.log(result);
                 }

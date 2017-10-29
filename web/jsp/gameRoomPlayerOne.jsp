@@ -9,7 +9,7 @@
 <div class="container">
     <div class="header">
         <label class="player-name"></label>
-        <form method="post" action="/quitGame" enctype="multipart/form-data">
+        <form method="post" action="${pageContext.request.contextPath}/quitGame" enctype="multipart/form-data">
         <button class="logout-btn">logout</button></form></div>
     <div class="myBoardSection"></div>
     <div class="rivalBoardSection"></div>
@@ -22,8 +22,8 @@
     </div>
     <div class="toolSection">Tools section
         <br><br>
-    <img class="mine-img" src="/resources/bomb_PNG29.png" draggable="true" width="50" height="50"
-    ondragstart="drag(event)"></img>
+    <img class="mine-img" src="../resources/bomb_PNG29.png" draggable="true" width="50" height="50"
+         ondragstart="drag(event)"></img>
         <br>
         <label class="tot-mine"></label>
     </div>
@@ -34,23 +34,24 @@
     var gListOfMineCoordinates = 0;
     function allowDrop(ev) {
 
+        if(gIsMyTurn) {
+            console.log(gListOfMineCoordinates);
+            row = $(ev.target)[0].parentNode.parentNode.rowIndex;
+            col = $(ev.target)[0].parentNode.cellIndex;
+            /*console.log("row : " + row );
+            console.log("col : " + col);*/
+            if (gListOfMineCoordinates.filter(function (coordinate) {
+                    return coordinate.row == row && coordinate.column == col;
+                }).length > 0) {
+                ev.preventDefault();
+                console.log("can be placed");
+                var btn = $(event.target);
+                btn.css("background-color", "green");
+            } else {
+                var btn = $(event.target);
+                btn.css("background-color", "");
 
-        console.log(gListOfMineCoordinates);
-        row = $(ev.target)[0].parentNode.parentNode.rowIndex;
-        col = $(ev.target)[0].parentNode.cellIndex;
-        /*console.log("row : " + row );
-        console.log("col : " + col);*/
-        if(gListOfMineCoordinates.filter(function(coordinate){
-                return coordinate.row == row && coordinate.column == col;
-            }).length > 0){
-            ev.preventDefault();
-            console.log("can be placed");
-            var btn = $(event.target);
-            btn.css("background-color" , "green");
-        } else {
-            var btn = $(event.target);
-            btn.css("background-color" , "");
-
+            }
         }
     }
 
@@ -74,13 +75,13 @@
 
         $.ajax({
             type: "GET" ,
-            url : "/ExecuteMine?row="+row + "&col="+col,
+            url : "${pageContext.request.contextPath}/ExecuteMine?row="+row + "&col="+col,
             success : function(result) {
                 console.log(result);
                 if(result === "good") {
                     $.ajax({
                         type: "GET" ,
-                        url : "/ExecuteMove",
+                        url : "${pageContext.request.contextPath}/ExecuteMove",
                         success : function(result) {
                             updateUiData(result);
                         }
@@ -129,7 +130,7 @@
     function getDataNoCoordinates() {
         $.ajax({
             type: "GET" ,
-            url : "/ExecuteMove",
+            url : "${pageContext.request.contextPath}/ExecuteMove",
             success : function(result) {
                 updateUiData(result);
             }
@@ -141,7 +142,7 @@
         btn.css("background-color", "");
         $.ajax({
             type: "GET" ,
-            url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 0 ,
+            url : "${pageContext.request.contextPath}/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 0 ,
             //url:"/ExecuteMove",
             success : function(result) {
                 updateUiData(result);
@@ -227,7 +228,7 @@
 
                     jRivalCell.val(rivalBoard[i][j]);
                     if(rivalBoard[i][j] == 'X') {
-                        jRivalCell.css("background-color", "Tomato");
+                        jRivalCell.css("background-color", "LightSeaGreen");
                     } else {
                         jRivalCell.css("background-color", "DarkGrey");
                     }
@@ -248,17 +249,17 @@
             showStatus(statusLabelText ,  "You Hit! You have another turn.");
         } else if(data[4] === "Win") {
             showStatus(statusLabelText ,  "You Win! Good job!");
-            window.location.href = "/jsp/finishGameStatistics.jsp";
+            window.location.href = "${pageContext.request.contextPath}/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalWin") {
             showStatus(statusLabelText ,  "You Lose! See you next game.");
             setTimeout(function() {
                 statusLabelText = " ";
             } , 2000);
-            window.location.href = "/jsp/finishGameStatistics.jsp";
+            window.location.href = "${pageContext.request.contextPath}/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalQuit") {
             showStatus(statusLabelText ,  "Rival Quit! You Win! Good job!");
             setTimeout(function() {
-                window.location.href = "/jsp/finishGameStatistics.jsp";
+                window.location.href = "${pageContext.request.contextPath}/jsp/finishGameStatistics.jsp";
             } , 3000);
 
         }
@@ -295,7 +296,7 @@
     function createTablesForElement(element , isMyBoard) {
 
         var myTableDiv = element;
-        var url_string = window.location.href;
+        var url_string =  window.location.href;
         var url = new URL(url_string);
         var boardSize = url.searchParams.get("boardSize");
         console.log("boardsize = "+ boardSize);
@@ -384,7 +385,7 @@
                 setBoardActive(true);
                 $.ajax({
                     type: "GET",
-                    url: "/ExecuteMove",
+                    url: "${pageContext.request.contextPath}/ExecuteMove",
                     success: function (result) {
                         gIsMyTurn = result[1]
                         if(result[4] == "rivalQuit") {
