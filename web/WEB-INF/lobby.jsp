@@ -80,7 +80,7 @@
                         "<td>"+element.typeGame+"</td>" +
                         "<td>"+element.playersEnteredGame+"</td>" +
                         "<td>"+element.isActiveGame+"</td>" +
-                        "<td><a href=\"removeGameByPlayer?gameName="+element.name+"\">Delete</a></td>");
+                        "<td><button onclick='removeGame()'>Delete</button></td>");
                 });
             }
         });
@@ -143,11 +143,22 @@
                             "<td>"+element.typeGame+"</td>" +
                             "<td>"+element.playersEnteredGame+"</td>" +
                             "<td>"+element.isActiveGame+"</td>" +
-                            "<td><a href=\"removeGameByPlayer?gameName="+element.name+"\">Delete</a></td>");
+                            "<td><button onclick='removeGame()'>Delete</button></td>");
                     });
                 }
             });
         }, 2000);
+
+        function removeGame() {
+
+            $.ajax({
+                type: "GET" ,
+                url : "/removeGameByPlayer?gameName="+event.target.parentNode.parentNode.children[0].textContent ,
+                success : function(result) {
+                    console.log(result);
+                }
+            });
+        }
 
         function showStatus(item , msg) {
             item.textContent = msg;
