@@ -9,10 +9,18 @@ public class Statistics {
         return hits;
     }
     private String playerName ;
+    private String playerNameQuit ;
     public String getAvargeTimeTurn() {
         return avargeTimeTurn;
     }
 
+    public String getPlayerNameQuit() {
+        return playerNameQuit;
+    }
+
+    public void setPlayerNameQuit(String playerNameQuit) {
+        this.playerNameQuit = playerNameQuit;
+    }
 
     public String getPlayerName() {
         return playerName;

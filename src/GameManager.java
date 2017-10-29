@@ -48,6 +48,7 @@ public class GameManager {
     private int replayIndex = 0;
     private boolean quitGame = false;
     private String gameType ;
+    private String namePlayerQuit;
     public SimpleStringProperty propWhoPlayProperty() {
         return propWhoPlay;
     }
@@ -55,8 +56,13 @@ public class GameManager {
         return  this.isGameOver;
     }
 
-    public void setQuitGame(boolean quitGame) {
+    public void setQuitGame(boolean quitGame, String playerName) {
         this.quitGame = quitGame;
+        this.namePlayerQuit = playerName;
+    }
+
+    public String getNamePlayerQuit() {
+        return namePlayerQuit;
     }
 
     public boolean getQuitGame (){
