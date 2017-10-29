@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.FileInputStream;
 import java.nio.file.spi.FileTypeDetector;
 
 public class Parser {
@@ -42,7 +43,7 @@ public class Parser {
 
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
                 ParsedGame = (BattleShipGame) jaxbUnmarshaller.unmarshal(file);
-            } else {
+                } else {
                 throw new Exception("File " + xmlPath + " is not exsist ." );
             }
 

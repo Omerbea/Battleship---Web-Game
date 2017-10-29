@@ -1,13 +1,16 @@
+import GameParser.BattleShipGame;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import java.io.*;
 import java.net.URI;
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 
@@ -38,6 +41,21 @@ public class loadGameServlet extends HttpServlet {
     //handle file xml and save it
         Part filePart = req.getPart("gameFile");
         InputStream fileContent = filePart.getInputStream();
+        try{
+            JAXBContext jaxbContext = JAXBContext.newInstance(BattleShipGame.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            BattleShipGame ParsedGame = (BattleShipGame) jaxbUnmarshaller.unmarshal(filePart.getInputStream());
+        }
+        catch (Exception e){
+            System.out.println("ERROR!");
+            System.out.println("not xml file");
+            session.setAttribute("errorLoadfile", "Please choose xml file");
+            //req.setAttribute("errorLoadfile", e.getMessage());
+            //resp.sendRedirect(req.getContextPath()+ "/lobby");
+            resp.setStatus(2);
+            resp.sendRedirect(req.getContextPath() + "/lobby");
+            return;
+        }
         System.out.println(fileContent);
         //TODO: change the path to be relative path
         File theDir = new File("gamesXmls");
@@ -61,8 +79,8 @@ public class loadGameServlet extends HttpServlet {
         String uniqFileName = "gamesXmls/SaveFileUploaded" + gameName + ".xml";
         System.out.println("save the file : " + uniqFileName);
         File file =new File(uniqFileName);
-
         try (InputStream input = filePart.getInputStream()) {
+
             if (file.exists()){
                 session.setAttribute("errorLoadfile", "Name exist in the lobby game already... choose anther name");
                 resp.setStatus(2);
@@ -74,12 +92,15 @@ public class loadGameServlet extends HttpServlet {
         }
     // do vaildation to file and if the file is valid add to the system
         try {
-            LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
 
+            String nameFileForDebug = filePart.getName();
+            String f = filePart.getHeader("fileItem");
+            if (!filePart.getName().endsWith(".xml")){
+                //throw new Exception("You must insert xml file");
+            }
+            LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
             lobbyManager.setNewGame(file.toPath().toString(), gameName, userName);
             //gameManager.loadFile(file.getAbsolutePath());
-
-
             //Files.deleteIfExists(file.toPath());
         }
         catch (Exception e){
@@ -110,4 +131,6 @@ public class loadGameServlet extends HttpServlet {
         }closed = false
         System.out.println(out);
      */}
+
+
 }
