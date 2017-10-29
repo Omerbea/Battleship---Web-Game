@@ -63,7 +63,7 @@
         console.log(player2data);
 
         var winnerTitle = $('.announce-winner')[0];
-        if(player1data.playerNameQuit != null || player1data.playerNameQuit != "" ) {
+        if(player1data.playerNameQuit != null ) {
             console.log("player name : " + player1data.playerName + " playernamequit : " + player1data.playerNameQuit);
             if(player1data.playerName == player1data.playerNameQuit) {
                 winnerTitle.textContent += player2data.playerName;
@@ -72,7 +72,6 @@
             } else {
                 console.log("error");
             }
-
         } else {
             if (player1data.score > player2data.score) {
                 winnerTitle.textContent += player1data.playerName;
