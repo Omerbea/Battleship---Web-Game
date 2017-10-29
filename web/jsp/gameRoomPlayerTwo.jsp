@@ -43,8 +43,8 @@
         /*console.log("row : " + row );
         console.log("col : " + col);*/
         if(gListOfMineCoordinates.filter(function(coordinate){
-            return coordinate.row == row && coordinate.column == col;
-        }).length > 0){
+                return coordinate.row == row && coordinate.column == col;
+            }).length > 0){
             ev.preventDefault();
             console.log("can be placed");
             var btn = $(event.target);
@@ -139,7 +139,8 @@
     }
 
     function getData() {
-
+        var btn = $(this);
+        btn.css("background-color", "");
         $.ajax({
             type: "GET" ,
             url : "/ExecuteMove?row="+this.parentNode.parentNode.rowIndex + "&col="+this.parentNode.cellIndex+"&playerNumber=" + 1 ,
@@ -165,6 +166,9 @@
                     jRivalCell.css("background-color" , "");
                     jRivalCell.attr("disabled", isBoardActive);
                 }else {
+                    if (jRivalCell.isDisabled){
+                        console.log("yes im disabled");
+                    }
                     jRivalCell.attr("disabled" , true);
                     console.log("hitMe: my"+ jRivalCell.val());
                 }
@@ -187,10 +191,10 @@
         gListOfMineCoordinates = data[6];
 
         var pNameStatus = $('.player-name')[0];
-        pNameStatus.textContent = data[5];
+        pNameStatus.textContent = data[5];var rivalUIBoard = $(".rivalBoard")[0];
 
-        var rivalUIBoard = $(".rivalBoard")[0];
         var isMyTurn = data[1];
+        console.log("data1 : " + data[1]);
         gIsMyTurn = data[1];
         gNumOfMines = data[0].numofMines;
 
@@ -202,6 +206,7 @@
         } else {
             $('.tot-mine')[0].textContent = gNumOfMines;
         }
+
 
         for(var i = 0 ; i < boardSize ; i++) {
             for(var j = 0 ; j < boardSize ; j++) {
@@ -217,39 +222,42 @@
                 console.log(rivalBoard[i][j]);
                 if(rivalBoard[i][j] != 'X' &&
                     rivalBoard[i][j] != '-') {
+                    /*    console.log("-----event--- " + rivalCell['mouseover']);
+                        if(rivalCell['mouseover'] == null) {
+                            console.log("-----AFTER event--- " + rivalCell['mouseover']);
+                            rivalCell.addEventListener('mouseover', function (event) {
+                                console.log("on mouse over");
+                                var btn = $(event.target);
+                                btn.css("background-color", "green");
+                            });
 
-                    rivalCell.addEventListener('mouseover' , function (event) {
-                        console.log("on mouse over");
-                        var btn = $(event.target);
-                        btn.css("background-color" , "green");});
 
-
-                    rivalCell.addEventListener('mouseleave' , function (event) {
-                        console.log("on mouse leave");
-                        var btn1 = $(event.target);
-                        btn1.css("background-color", "");
-                    })
-
+                            rivalCell.addEventListener('mouseleave', function (event) {
+                                console.log("on mouse leave");
+                                var btn1 = $(event.target);
+                                btn1.css("background-color", "");
+                            })
+                        }
+    */
 
                 } else
                 {
 
                     jRivalCell.val(rivalBoard[i][j]);
+                    /*
+                                        rivalCell.addEventListener('mouseover', function (event) {
+                                            console.log("on mouse over");
+                                            var btn = $(event.target);
+                                            btn.css("background-color", "red");
 
-                    rivalCell.addEventListener('mouseover', function (event) {
-                        console.log("on mouse over");
-                        var btn = $(event.target);
-                        btn.css("background-color", "red");
-
-                    });
+                                        });
 
 
-                    rivalCell.addEventListener('mouseleave', function (event) {
-                        console.log("on mouse leave");
-                        var btn1 = $(event.target);
-                        btn1.css("background-color", "");
-                        x
-                    })
+                                        rivalCell.addEventListener('mouseleave', function (event) {
+                                            console.log("on mouse leave");
+                                            var btn1 = $(event.target);
+                                            btn1.css("background-color", "");
+                                        })*/
                 }
             }
         }
@@ -271,13 +279,8 @@
             } , 2000);
             window.location.href = "/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalQuit") {
-            console.log("rival quit");
-            showStatus(statusLabelText ,  "Rival Quit ! You Win! Good job!");
-            setTimeout(function() {
-                statusLabelText = " ";
-                window.location.href = "/jsp/finishGameStatistics.jsp";
-            } , 2000);
-
+            showStatus(statusLabelText ,  "Rival Quit! You Win! Good job!");
+            window.location.href = "/jsp/finishGameStatistics.jsp";
 
         }
 
@@ -347,6 +350,24 @@
                         $(event.target).disabled = true;
                     });
 
+                    cellBtn.addEventListener('mouseover', function (event) {
+
+                        console.log("on mouse over");
+                        var btn = $(event.target);
+                        console.log(btn);
+                        console.log("VAL = " + btn.val());
+                        if(btn.val() != '-' &&
+                            btn.val() != 'X') {
+                            btn.css("background-color", "green");
+                        }
+                    });
+
+                    cellBtn.addEventListener('mouseleave', function (event) {
+                        console.log("on mouse leave");
+                        var btn1 = $(event.target);
+                        btn1.css("background-color", "");
+                    })
+
                 }
                 td.appendChild(cellBtn);
                 tr.appendChild(td);
@@ -385,6 +406,7 @@
                         gIsMyTurn = result[1]
                         if(result[4] == "rivalQuit") {
                             console.log("rival quit");
+                            // window.location.href = window.location.pathname + '/lobby';
                             getDataNoCoordinates();
                             console.log("after redirect quit");
                         }
@@ -393,7 +415,7 @@
 
                 });
             }
-        },3000);
+        },2000);
         console.log("call to pullingIsMyTurn 1");
         //pullingIsMyTurn();
     }
