@@ -260,8 +260,9 @@
             window.location.href = "/jsp/finishGameStatistics.jsp";
         } else if(data[4] === "rivalQuit") {
             showStatus(statusLabelText ,  "Rival Quit! You Win! Good job!");
-            window.location.href = "/jsp/finishGameStatistics.jsp";
-
+            setTimeout(function() {
+                window.location.href = "/jsp/finishGameStatistics.jsp";
+            } , 3000);
         }
 
         $(".game-type")[0].textContent = gameType;
@@ -272,9 +273,11 @@
         var rivalUIBoard = $(".rivalBoardSection");
         if(isMyTurn) {
             console.log("its your turn");
+            $(".isTurn")[0].textContent = "Yes";
             setBoardActive(false);
 
         } else {
+            $(".isTurn")[0].textContent = "No";
             console.log("its NOT your turn");
             setBoardActive(true);
 
