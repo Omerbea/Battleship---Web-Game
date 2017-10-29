@@ -42,6 +42,7 @@ public class Parser {
 
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
                 ParsedGame = (BattleShipGame) jaxbUnmarshaller.unmarshal(file);
+
             } else {
                 throw new Exception("File " + xmlPath + " is not exsist ." );
             }

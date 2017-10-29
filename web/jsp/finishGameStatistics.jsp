@@ -18,7 +18,8 @@
     <div class="head-title">
         <label>
             Finish Game Statistics
-        </label>
+        </label><br></br>
+        <label class="announce-winner">And The Winner Is :</label>
     </div>
     <div class="winner-stat">
         <label class="winner-name" >name :</label><br></br>
@@ -60,6 +61,19 @@
         var player2data = data[1];
         console.log(player1data);
         console.log(player2data);
+
+        var winnerTitle = $('.announce-winner')[0];
+        if(player1data.score > player2data.score ) {
+            winnerTitle.textContent += player1data.playerName;
+        } else {
+            winnerTitle.textContent += player2data.playerName;
+        }
+
+        var name = $('.winner-name')[0];
+        name.textContent += player1data.playerName;
+        name = $('.loser-name')[0];
+        name.textContent += player2data.playerName;
+
         var avgTime = $('.winner-avg-time')[0];
         avgTime.textContent += player1data.avargeTimeTurn;
         avgTime = $('.loser-avg-time')[0];

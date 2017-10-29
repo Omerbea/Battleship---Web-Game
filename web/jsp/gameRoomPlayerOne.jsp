@@ -5,7 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Game Room</title>
 </head>
-<body>1
+<body>
 <div class="container">
     <div class="header">
         <label class="player-name"></label>
@@ -218,42 +218,20 @@
                 console.log(rivalBoard[i][j]);
                 if(rivalBoard[i][j] != 'X' &&
                     rivalBoard[i][j] != '-') {
-                /*    console.log("-----event--- " + rivalCell['mouseover']);
-                    if(rivalCell['mouseover'] == null) {
-                        console.log("-----AFTER event--- " + rivalCell['mouseover']);
-                        rivalCell.addEventListener('mouseover', function (event) {
-                            console.log("on mouse over");
-                            var btn = $(event.target);
-                            btn.css("background-color", "green");
-                        });
-
-
-                        rivalCell.addEventListener('mouseleave', function (event) {
-                            console.log("on mouse leave");
-                            var btn1 = $(event.target);
-                            btn1.css("background-color", "");
-                        })
-                    }
-*/
 
                 } else
                 {
 
                     jRivalCell.val(rivalBoard[i][j]);
-/*
-                    rivalCell.addEventListener('mouseover', function (event) {
-                        console.log("on mouse over");
-                        var btn = $(event.target);
-                        btn.css("background-color", "red");
+                    if(rivalBoard[i][j] == 'X') {
+                        jRivalCell.css("background-color", "Tomato");
+                    } else {
+                        jRivalCell.css("background-color", "DarkGrey");
+                    }
+                }
 
-                    });
-
-
-                    rivalCell.addEventListener('mouseleave', function (event) {
-                        console.log("on mouse leave");
-                        var btn1 = $(event.target);
-                        btn1.css("background-color", "");
-                    })*/
+                if(myBoard[i][j] == 'X') {
+                    jCell.css("background-color", "Tomato");
                 }
             }
         }
