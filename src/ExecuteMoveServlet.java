@@ -34,6 +34,7 @@ public class ExecuteMoveServlet extends HttpServlet {
         // Handle Session
         HttpSession session = req.getSession(false);
         if (session == null){
+            System.out.println("session destroyed");
             req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
             return;
         }

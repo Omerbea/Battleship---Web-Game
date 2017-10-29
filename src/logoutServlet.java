@@ -12,6 +12,11 @@ import java.util.LinkedList;
 public class logoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        if (session == null){
+            req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
+
+        }
         logOut(req,resp);
     }
 
