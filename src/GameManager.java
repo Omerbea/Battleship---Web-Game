@@ -262,6 +262,7 @@ public class GameManager {
                         replay.setIsMine(true);
                         this.replayTurns.add(this.replayIndex,replay);
                         replayIndex += 1;
+                        changePlayer();
                         return true;
                     }
                     else{
