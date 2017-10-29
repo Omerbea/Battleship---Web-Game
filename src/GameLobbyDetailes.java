@@ -19,6 +19,10 @@ public class GameLobbyDetailes {
         this.pathFile = i_pathFile;
     }
 
+    public String getTypeGame() {
+        return typeGame;
+    }
+
     public String getNamePlayer1() {
         return namePlayer1;
     }

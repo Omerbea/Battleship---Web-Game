@@ -105,6 +105,12 @@ public class ExecuteMoveServlet extends HttpServlet {
 
         System.out.println("im "+ player + "my res = " + resExecuteMove);
 
+
+        //Type game
+        GameLobbyDetailes gameLobbyDetailes = lobbyManager.getGameLobbyDetailsByName(gameName);
+        String typeGame = gameLobbyDetailes.getTypeGame();
+
+
         // prepare response
         ArrayList <Object> array4Response = new ArrayList<Object>();
         array4Response.add(statistics); //0
@@ -114,6 +120,7 @@ public class ExecuteMoveServlet extends HttpServlet {
         array4Response.add(resExecuteMove); //4
         array4Response.add(session.getAttribute("userName")); //5
         array4Response.add(position); //6
+        array4Response.add(typeGame);//7
         resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         Gson gson = new GsonBuilder().create();
