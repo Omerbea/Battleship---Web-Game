@@ -83,9 +83,14 @@ public class LobbyManager {
 
     }
 
-    public boolean removeGameManager (String gameName){
-        this.games.remove(gameName);
-        return true;
+    public boolean removeGameManagerByplayer (String gameName, String  playerName){
+        boolean res =false;
+        GameLobbyDetailes gameLobbyDetailes = this.games.get(gameName);
+        if (gameLobbyDetailes.getPlayerNameThatLoadedCurrentGame().equals(playerName)){
+            this.games.remove(gameName);
+            res = true;
+        }
+        return res;
     }
 
 

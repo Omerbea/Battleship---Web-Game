@@ -9,6 +9,7 @@ public class GameLobbyDetailes {
     private String pathFile;
     private String namePlayer1 ;
     private String namePlayer2 ;
+
     public GameLobbyDetailes (String i_name, String i_playerNameThatLoadedCurrentGame, int i_boardSize, String i_typeGame, GameManager i_gameManager, String i_pathFile){
         this.name =i_name;
         this.playerNameThatLoadedCurrentGame = i_playerNameThatLoadedCurrentGame;
@@ -21,6 +22,10 @@ public class GameLobbyDetailes {
 
     public String getTypeGame() {
         return typeGame;
+    }
+
+    public int getPlayersEnteredGame() {
+        return playersEnteredGame;
     }
 
     public String getNamePlayer1() {
@@ -44,6 +49,10 @@ public class GameLobbyDetailes {
         playersEnteredGame =0;
         this.gameManager = gameManager;
 
+    }
+
+    public String getPlayerNameThatLoadedCurrentGame() {
+        return playerNameThatLoadedCurrentGame;
     }
 
     public void setActiveGame() {
