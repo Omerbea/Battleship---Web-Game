@@ -36,8 +36,8 @@ public class waitingRoomServlet extends HttpServlet {
             int playerNumber = 1 + currentDetails.amountOfPlayersInGame() ;
             System.out.println(playerNumber);
             session.setAttribute("playerNumber" , playerNumber);
-
-            currentDetails.addPlayerEntered();
+            String playerName = (String)session.getAttribute("userName");
+            currentDetails.addPlayerEntered(playerName);
             isFirstTime = true ;
 
         }
@@ -93,7 +93,9 @@ public class waitingRoomServlet extends HttpServlet {
             //TODO: handle with error . go to log-in page
         }
         GameLobbyDetailes currentDetails = lobbyManager.getGameLobbyDetailsByName((String) session.getAttribute("gameName"));
-        currentDetails.removePlayerFromRoom();
+        String playerName = (String)session.getAttribute("userName");
+
+        currentDetails.removePlayerFromRoom(playerName);
         session.removeAttribute("gameName");
         session.removeAttribute("playerNumber" );
 
