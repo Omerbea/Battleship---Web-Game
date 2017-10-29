@@ -15,7 +15,6 @@ public class logoutServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (session == null){
             req.getRequestDispatcher("/WEB-INF/logIn.jsp").forward(req , resp);
-
         }
         logOut(req,resp);
     }

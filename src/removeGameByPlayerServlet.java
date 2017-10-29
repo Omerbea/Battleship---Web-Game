@@ -26,6 +26,7 @@ public class removeGameByPlayerServlet extends HttpServlet {
         }
         String namePlayer = (String)session.getAttribute("userName");
         //TODO: change the game name get from the req
-        lobbyManager.removeGameManagerByplayer("gameName", namePlayer);
+        String gameName =  req.getParameter("gameName");
+        lobbyManager.removeGameManagerByplayer(gameName, namePlayer);
     }
 }
