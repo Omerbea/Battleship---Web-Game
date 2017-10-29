@@ -32,8 +32,13 @@ public class FinalStatisticsServlet extends HttpServlet {
         //get statistics
         String gameName = (String) session.getAttribute("gameName");
         GameManager gameManager = lobbyManager.getGameManagerByName(gameName);
+        GameLobbyDetailes gameLobbyDetailes = lobbyManager.getGameLobbyDetailsByName(gameName);
+        String player1 = gameLobbyDetailes.getNamePlayer1();
+        String player2 = gameLobbyDetailes.getNamePlayer2();
         Statistics statisticsPlayer1 = gameManager.getGameStatisticByPlayer(0);
+        statisticsPlayer1.setPlayerName(player1);
         Statistics statisticsPlayer2 = gameManager.getGameStatisticByPlayer(1);
+        statisticsPlayer2.setPlayerName(player2);
 
         //create response
         ArrayList<Object> array4Response = new ArrayList<Object>();

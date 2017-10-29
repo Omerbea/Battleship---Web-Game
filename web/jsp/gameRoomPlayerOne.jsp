@@ -7,6 +7,7 @@
 </head>
 <body>1
 <div class="container">
+<div class="container">
     <div class="header">
         <label class="player-name"></label>
         <form method="post" action="/quitGame" enctype="multipart/form-data">

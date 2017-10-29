@@ -8,9 +8,18 @@ public class Statistics {
     public int getHits() {
         return hits;
     }
-
+    private String playerName ;
     public String getAvargeTimeTurn() {
         return avargeTimeTurn;
+    }
+
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public int getNumOfTurns() {
