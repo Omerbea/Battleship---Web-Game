@@ -36,10 +36,11 @@ public class FinalStatisticsServlet extends HttpServlet {
         String player1 = gameLobbyDetailes.getNamePlayer1();
         String player2 = gameLobbyDetailes.getNamePlayer2();
         Statistics statisticsPlayer1 = gameManager.getGameStatisticByPlayer(0);
-        statisticsPlayer1.setPlayerNameQuit(gameManager.getNamePlayerQuit());
+        String namequit = gameManager.getNamePlayerQuit();
+        statisticsPlayer1.setPlayerNameQuit(namequit);
         statisticsPlayer1.setPlayerName(player1);
         Statistics statisticsPlayer2 = gameManager.getGameStatisticByPlayer(1);
-        statisticsPlayer2.setPlayerNameQuit(gameManager.getNamePlayerQuit());
+        statisticsPlayer2.setPlayerNameQuit(namequit);
         statisticsPlayer2.setPlayerName(player2);
 
 

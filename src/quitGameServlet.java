@@ -23,7 +23,7 @@ public class quitGameServlet extends HttpServlet {
         LobbyManager lobbyManager = (LobbyManager) getServletContext().getAttribute("lobbyManager");
         GameManager gameManager = lobbyManager.getGameManagerByName((String)session.getAttribute("gameName"));
         lobbyManager.setGameIsActive((String)session.getAttribute("gameName"));
-        String namePlayer = (String) session.getAttribute("userNmae");
+        String namePlayer = (String) session.getAttribute("userName");
         gameManager.setQuitGame(true,namePlayer);
         gameManager.finishTheGame();
         //session.removeAttribute("gameName");
